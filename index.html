@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Ku soo dhowaada SahalCrypto</h1>
-  <p>Mashruucayga crypto wuu socdaa!</p>
+  <p>App-kaaga crypto wuu socdaa!</p>
 
   <div id="login-section">
     <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
@@ -20,19 +20,21 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCC5Wki6GSEifxnPu0HiHm4Jsub5_jkeaM",
+      apiKey: "AIzaSyCC5Wki6GSEifxnPu0HiHm4JsubS_jkeaM",
       authDomain: "sahal-crypto-exchange.firebaseapp.com",
       projectId: "sahal-crypto-exchange",
       storageBucket: "sahal-crypto-exchange.firebasestorage.app",
       messagingSenderId: "349841304186",
       appId: "1:349841304186:web:aab9d616bfb09fc230e9c3",
-      measurementId: "G-868823ZHRW"
+      measurementId: "G-86B823ZHRW"
     };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const analytics = getAnalytics(app);
 
     // Diyaarinta Recaptcha
     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
