@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.aistudio.sahalcrypto.xptzqm",
+      "sha256_cert_fingerprints": [
+        "KA_SOO_BING_SHA256_FINGERPRINT_KA_APP_KAAGA_MARKA_AAD_SIGN_GAREYSO"
+      ]
+    }
+  }
+]
