@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SahalCrypto</title>
+  <title>SahalCrypto</title>
 </head>
 <body>
-    <h1>Ku soo dhowaada SahalCrypto</h1>
-    <p>Mashruucayga crypto wuu socdaa!</p>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SahalCrypto</title>
-  
+  <h1>Ku soo dhowaada SahalCrypto</h1>
+  <p>Mashruucayga crypto wuu socdaa!</p>
+
+  <div id="login-section">
+    <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
+    <button id="send-code-btn">Koodhka ii dir</button>
+  </div>
+
+  <div id="otp-section" style="display:none;">
+    <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
+    <button id="verify-code-btn">Hubi koodhka</button>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    // 2. Koodhkaagii configuration-ka
     const firebaseConfig = {
       apiKey: "AIzaSyCC5Wki6GSEifxnPu0HiHm4Jsub5_jkeaM",
       authDomain: "sahal-crypto-exchange.firebaseapp.com",
@@ -28,61 +31,31 @@
       measurementId: "G-868823ZHRW"
     };
 
-    // 3. Halkan ayaanu ku bilownay Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    console.log("Firebase wuu socdaa oo wuu ku xirmay!");
+
+    // Diyaarinta Recaptcha
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
+
+    // Dirista Koodhka
+    document.getElementById('send-code-btn').addEventListener('click', () => {
+      const phoneNumber = document.getElementById('phone-number').value;
+      signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          alert("Koodhkii waa la diray!");
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('otp-section').style.display = 'block';
+        }).catch((error) => { alert("Khalad: " + error.message); });
+    });
+
+    // Hubinta Koodhka
+    document.getElementById('verify-code-btn').addEventListener('click', () => {
+      const code = document.getElementById('otp-code').value;
+      window.confirmationResult.confirm(code).then((result) => {
+        alert("Si guul leh ayaad u gashay!");
+      }).catch((error) => { alert("Koodhkaagu waa qaldan yahay!"); });
+    });
   </script>
-</head>
-<body>
-  <h1>Ku soo dhowaada SahalCrypto</h1>
-  <p>Mashruucayga crypto wuu socdaa!</p>
 </body>
 </html>
-<body>
-  <h1>Ku soo dhowaada SahalCrypto</h1>
-  <p>Mashruucayga crypto wuu socdaa!</p>
-
-  <div id="login-section">
-    <input type="tel" id="phone-number" placeholder="+252 61xxxxxxx">
-    <button id="send-code-btn">Koodhka ii dir</button>
-  </div>
-
-  <div id="otp-section" style="display:none;">
-    <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
-    <button id="verify-code-btn">Hubi koodhka</button>
-  </div>
-</body>
-// Ku dar qaybtan hoose gudaha <script> tag-gaaga
-import { RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-// Diyaarinta Recaptcha (Waa qasab markaad isticmaalayso Phone Auth)
-window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', {
-  'size': 'invisible'
-});
-
-// Marka la riixo badhanka "Koodhka ii dir"
-document.getElementById('send-code-btn').addEventListener('click', () => {
-  const phoneNumber = document.getElementById('phone-number').value;
-  const appVerifier = window.recaptchaVerifier;
-
-  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-      window.confirmationResult = confirmationResult;
-      alert("Koodhkii waa la diray!");
-      document.getElementById('login-section').style.display = 'none';
-      document.getElementById('otp-section').style.display = 'block';
-    }).catch((error) => {
-      alert("Khalad baa dhacay: " + error.message);
-    });
-});
-
-// Marka la riixo badhanka "Hubi koodhka"
-document.getElementById('verify-code-btn').addEventListener('click', () => {
-  const code = document.getElementById('otp-code').value;
-  window.confirmationResult.confirm(code).then((result) => {
-    alert("Si guul leh ayaad u gashay!");
-  }).catch((error) => {
-    alert("Koodhkaagu waa qaldan yahay!");
-  });
-});
