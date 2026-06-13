@@ -1,0 +1,12 @@
+# Secret files
+local.properties
+*.keystore
+*.jks
+*.env
+
+# Build files
+build/
+.gradle/
+.idea/
+*.apk
+
