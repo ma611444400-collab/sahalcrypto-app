@@ -1,63 +1,119 @@
 <!DOCTYPE html>
-<html lang="so">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahal Crypto - Login</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+    <title>SahalCrypto</title>
+    <!-- Security guard -->
+    <script>
+        if (!localStorage.getItem('sahal_authenticated')) {
+            // Haddii uu qofku login ka baxsan yahay, u daa login-ka
         }
-        .login-card {
-            background-color: #1e1e1e;
+    </script>    <style>
+        :root {
+            --bg-color: #0B0E11;
+            --primary: #00C087;
+            --card-bg: #161A21;
+            --text-color: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #login-section, #otp-section {
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
             text-align: center;
         }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #00e676;
-            border: none;
-            border-radius: 5px;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-        }
     </style>
+
 </head>
 <body>
+    <h1>Ku soo dhowada SahalCrypto</h1>
 
-<div class="login-card">
-    <h2>Sahal Crypto</h2>
-    <p>Soo gal koontadaada</p>
-    <input type="email" placeholder="Email-kaaga">
-    <input type="password" placeholder="Password-kaaga">
-    <button id="loginBtn">Login</button>
+    <div id="login-section">
+        <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
+        <button id="send-code-btn">Koodhka ii dir</button>
+    </div>
+
+    <div id="otp-section" style="display:none;">
+        <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
+        <button id="verify-code-btn">Hubi koodhka</button>
+    </div>
+
+    <nav class="nav-links"></nav><div id="dashboard-section" style="display: none; margin-top: 20px;">
+    <div class="dashboard-card" style="background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;">
+        <p style="color: #888; margin: 0;">Isku-darka Haraaga</p>
+        <h1 style="color: var(--primary); margin: 10px 0;">8,099.00 USDT</h1>
+        <p style="color: #888; margin: 0;">≈ 8,099.00 USD <span style="color: var(--primary);">+4.25%</span></p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button style="background: var(--card-bg); color: white; padding: 15px; border-radius: 10px; border: none;">Libso Crypto</button>
+        <button style="background: var(--card-bg); color: white; padding: 15px; border-radius: 10px; border: none;">Libi / Lacag bixi</button>
+    </div>
 </div>
-<script>
-  document.getElementById("loginBtn").addEventListener("click", function() {
-    alert("Badhanka wuu shaqaynayaa!");
-  });
-</script>
 
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCSwkI6G5EifxnPuOHiHm4JsubS_jkeaW",
+            authDomain: "sahal-crypto-exchange.firebaseapp.com",
+            projectId: "sahal-crypto-exchange",
+            storageBucket: "sahal-crypto-exchange.appspot.com",
+            messagingSenderId: "349841304186",
+            appId: "1:349841304186:web:aab9d616bfb09fc230a9c3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
+
+        document.getElementById('send-code-btn').addEventListener('click', () => {
+            const phoneNumber = document.getElementById('phone-number').value;
+            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+            .then((confirmationResult) => {
+                window.confirmationResult = confirmationResult;
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('otp-section').style.display = 'block';
+            }).catch((error) => { alert("Khalad: " + error.message); });
+        });
+
+        document.getElementById('verify-code-btn').addEventListener('click', () => {
+            const code = document.getElementById('otp-code').value;
+            window.confirmationResult.confirm(code).then((result) => {
+                localStorage.setItem('sahal_authenticated', 'true');
+                localStorage.setItem('sahal_username', result.user.phoneNumber);
+                alert("Si guul leh ayaad u gashay!");
+                window.location.reload();
+            }).catch((error) => { alert("Koodhkaagu waa qaldan yahay!"); });
+        });
+
+        // Logout iyo Session Script
+        const isAuthenticated = localStorage.getItem('sahal_authenticated');// Qari login-ka haddii qofku uu soo galay
+if (isAuthenticated) {
+    document.getElementById('login-section').style.display = 'none';
+}
+
+        if (isAuthenticated) {
+            const navLinks = document.querySelector('.nav-links');
+            const logoutBtn = document.createElement('a');
+            logoutBtn.href = '#';
+            logoutBtn.innerHTML = 'Ka bax';
+            logoutBtn.onclick = () => {
+                localStorage.removeItem('sahal_authenticated');
+                window.location.reload();
+            };
+            navLinks.appendChild(logoutBtn);
+        }
+    </script>
 </body>
 </html>
-
