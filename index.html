@@ -1,63 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SahalCrypto</title>
+    <title>SahalCrypto</title>
+    <!-- Security guard -->
+    <script>
+        if (!localStorage.getItem('sahal_authenticated')) {
+            // Haddii uu qofku login ka baxsan yahay, u daa login-ka
+        }
+    </script>
 </head>
 <body>
-  <h1>Ku soo dhowaada SahalCrypto</h1>
-  <p>App-kaaga crypto wuu socdaa!</p>
+    <h1>Ku soo dhowada SahalCrypto</h1>
 
-  <div id="login-section">
-    <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
-    <button id="send-code-btn">Koodhka ii dir</button>
-  </div>
+    <div id="login-section">
+        <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
+        <button id="send-code-btn">Koodhka ii dir</button>
+    </div>
 
-  <div id="otp-section" style="display:none;">
-    <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
-    <button id="verify-code-btn">Hubi koodhka</button>
-  </div>
+    <div id="otp-section" style="display:none;">
+        <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
+        <button id="verify-code-btn">Hubi koodhka</button>
+    </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+    <nav class="nav-links"></nav>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCC5Wki6GSEifxnPu0HiHm4JsubS_jkeaM",
-      authDomain: "sahal-crypto-exchange.firebaseapp.com",
-      projectId: "sahal-crypto-exchange",
-      storageBucket: "sahal-crypto-exchange.firebasestorage.app",
-      messagingSenderId: "349841304186",
-      appId: "1:349841304186:web:aab9d616bfb09fc230e9c3",
-      measurementId: "G-86B823ZHRW"
-    };
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const analytics = getAnalytics(app);
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCSwkI6G5EifxnPuOHiHm4JsubS_jkeaW",
+            authDomain: "sahal-crypto-exchange.firebaseapp.com",
+            projectId: "sahal-crypto-exchange",
+            storageBucket: "sahal-crypto-exchange.appspot.com",
+            messagingSenderId: "349841304186",
+            appId: "1:349841304186:web:aab9d616bfb09fc230a9c3"
+        };
 
-    // Diyaarinta Recaptcha
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-    // Dirista Koodhka
-    document.getElementById('send-code-btn').addEventListener('click', () => {
-      const phoneNumber = document.getElementById('phone-number').value;
-      signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          alert("Koodhkii waa la diray!");
-          document.getElementById('login-section').style.display = 'none';
-          document.getElementById('otp-section').style.display = 'block';
-        }).catch((error) => { alert("Khalad: " + error.message); });
-    });
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
 
-    // Hubinta Koodhka
-    document.getElementById('verify-code-btn').addEventListener('click', () => {
-      const code = document.getElementById('otp-code').value;
-      window.confirmationResult.confirm(code).then((result) => {
-        alert("Si guul leh ayaad u gashay!");
-      }).catch((error) => { alert("Koodhkaagu waa qaldan yahay!"); });
-    });
-  </script>
+        document.getElementById('send-code-btn').addEventListener('click', () => {
+            const phoneNumber = document.getElementById('phone-number').value;
+            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+            .then((confirmationResult) => {
+                window.confirmationResult = confirmationResult;
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('otp-section').style.display = 'block';
+            }).catch((error) => { alert("Khalad: " + error.message); });
+        });
+
+        document.getElementById('verify-code-btn').addEventListener('click', () => {
+            const code = document.getElementById('otp-code').value;
+            window.confirmationResult.confirm(code).then((result) => {
+                localStorage.setItem('sahal_authenticated', 'true');
+                localStorage.setItem('sahal_username', result.user.phoneNumber);
+                alert("Si guul leh ayaad u gashay!");
+                window.location.reload();
+            }).catch((error) => { alert("Koodhkaagu waa qaldan yahay!"); });
+        });
+
+        // Logout iyo Session Script
+        const isAuthenticated = localStorage.getItem('sahal_authenticated');// Qari login-ka haddii qofku uu soo galay
+if (isAuthenticated) {
+    document.getElementById('login-section').style.display = 'none';
+}
+
+        if (isAuthenticated) {
+            const navLinks = document.querySelector('.nav-links');
+            const logoutBtn = document.createElement('a');
+            logoutBtn.href = '#';
+            logoutBtn.innerHTML = 'Ka bax';
+            logoutBtn.onclick = () => {
+                localStorage.removeItem('sahal_authenticated');
+                window.location.reload();
+            };
+            navLinks.appendChild(logoutBtn);
+        }
+    </script>
 </body>
 </html>
