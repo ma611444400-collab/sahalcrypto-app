@@ -1,111 +1,1050 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="so">
 <head>
-    <title>SahalCrypto</title>
-    <!-- Security guard -->
     <script>
+        // Security guard: If the user is not authenticated, redirect to login page immediately
         if (!localStorage.getItem('sahal_authenticated')) {
-            // Haddii uu qofku login ka baxsan yahay, u daa login-ka
+            window.location.href = 'login.html';
         }
-    </script>    <style>
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahal Crypto | Official App Landing Page & Official Site</title>
+    
+    <!-- SEO Optimization Meta Tags -->
+    <meta name="description" content="Sahal Crypto waa barnaamijka rasmiga ah ee kuu oggolaanaya inaad si sahlan oo ammaan ah ula socoto, u iibsato, una iibiso lacagaha qoraal-gacmeedka ah (Cryptocurrencies). Kala soo bix barnaamijka rasmiga ah halkan.">
+    <meta name="keywords" content="Sahal Crypto, sahalcrypt.com, Somalia Crypto, EVC Plus Crypto, Bitcoin Somalia, Sahal Crypto APK download, official Sahal Crypto app">
+    <meta name="author" content="Sahal Crypto Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sahalcrypt.com/">
+    <meta property="og:title" content="Sahal Crypto - Kala Soo Deg App-ka Rasmiga Ah">
+    <meta property="og:description" content="Nidaamka ugu fudud, uguna ammaanada badan ee ku saabsan ganacsiga lacagaha dhijitaalka ah gudaha Soomaaliya.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=600&auto=format&fit=crop">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sahalcrypt.com/">
+    <meta property="twitter:title" content="Sahal Crypto - App-ka Rasmiga Ah">
+    <meta property="twitter:description" content="Ku soco xawaarihii ugu dambeeyay ee suuqyada caalamiga ah adigoo isticmaalaya Sahal Crypto.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
         :root {
-            --bg-color: #0B0E11;
-            --primary: #00C087;
-            --card-bg: #161A21;
-            --text-color: #FFFFFF;
+            --bg-color: #0B0E11; /* Deep Charcoal */
+            --bg-card: #151A21; /* Dark Card Grey */
+            --primary: #00C087; /* Mint Green */
+            --primary-hover: #00E6A1; /* Lighter Mint Green */
+            --text-main: #F0F3F5; /* Soft High Contrast White */
+            --text-muted: #8E9BA5; /* Muted Slate Gray */
+            --border-color: rgba(0, 192, 135, 0.15); /* Soft Mint Border */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 20px;
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        #login-section, #otp-section {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
+        /* Ambient Glow Backgrounds */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 192, 135, 0.08) 0%, rgba(11, 14, 17, 0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 192, 135, 0.05) 0%, rgba(11, 14, 17, 0) 70%);
+            bottom: 10%;
+            left: -200px;
+            z-index: -1;
+        }
+
+        /* Header / Navbar */
+        header {
+            border-bottom: 1px solid rgba(142, 155, 165, 0.1);
+            position: sticky;
+            top: 0;
+            background: rgba(11, 14, 17, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .download-nav-btn {
+            background-color: rgba(0, 192, 135, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .download-nav-btn:hover {
+            background-color: var(--primary);
+            color: #000;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 6rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #050709;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 192, 135, 0.25);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 192, 135, 0.35);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(142, 155, 165, 0.2);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 192, 135, 0.03);
+            transform: translateY(-2px);
+        }
+
+        /* Mockup Representation */
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 290px;
+            height: 580px;
+            background-color: #080A0D;
+            border: 10px solid #232D37;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 192, 135, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Screen Contents */
+        .mockup-header {
+            background-color: #12181E;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mockup-body {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #0B0E11;
+        }
+
+        .mockup-balance {
+            background: linear-gradient(135deg, #151A21 0%, #12161D 100%);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 16px;
+        }
+
+        .mockup-balance-lbl {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .mockup-balance-amount {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 4px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .mockup-balance-sub {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mockup-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #151A21;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .mockup-list-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mockup-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(0, 192, 135, 0.15);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .mockup-coin-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .mockup-coin-symbol {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .mockup-coin-val {
+            text-align: right;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Real-time Ticker Bar on Landing Page */
+        .live-ticker-container {
+            background-color: #151A21;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .live-ticker-track {
+            display: flex;
+            gap: 3rem;
+            animation: tickerScroll 25s linear infinite;
+            white-space: nowrap;
+            width: max-content;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .ticker-item span.coin {
+            font-weight: 850;
+        }
+
+        .ticker-item span.rate {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+        }
+
+        .ticker-item span.change {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            background-color: rgba(0, 192, 135, 0.1);
+            color: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            color: var(--primary);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px -10px rgba(0, 192, 135, 0.12);
+            border-color: rgba(0, 192, 135, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon-wrapper {
+            background-color: rgba(0, 192, 135, 0.08);
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        /* Installation Guide & CTA */
+        .install-section {
+            background-color: #0E1217;
+            border-top: 1px solid rgba(142, 155, 165, 0.1);
+            border-bottom: 1px solid rgba(142, 155, 165, 0.1);
+            padding: 6rem 2rem;
+        }
+
+        .install-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .install-header h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .install-header h2 span {
+            color: var(--primary);
+        }
+
+        .install-header p {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(0, 192, 135, 0.12);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Trust Banner & QR Code */
+        .qr-card-widget {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
         }
-    </style>
 
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* SVG generated dynamic representation of QR Code matching theme colors */
+        .qr-placeholder svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* App download metadata status */
+        .download-meta {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .download-meta span i {
+            color: var(--primary);
+            margin-right: 4px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-color);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(142, 155, 165, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(142, 155, 165, 0.05);
+        }
+
+        .footer-logo {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom p span {
+            color: var(--primary);
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 968px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding-top: 3rem;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 2.5rem;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .install-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .qr-card-widget {
+                max-width: 450px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .cta-group .btn-primary, .cta-group .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none; /* Mobile navigation simplified */
+            }
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+    </style>
 </head>
 <body>
-    <h1>Ku soo dhowada SahalCrypto</h1>
 
-    <div id="login-section">
-        <input type="tel" id="phone-number" placeholder="+252 61XXXXXXX">
-        <button id="send-code-btn">Koodhka ii dir</button>
+    <!-- Ambient Ambient Glows -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Top Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cubes"></i> Sahal <span>Crypto</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="active">Sifooyinka</a>
+                <a href="#guide">Habka Dejinta</a>
+                <a href="#download" class="download-nav-btn"><i class="fa-solid fa-download"></i> Deji APK</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero Landing Elements -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Sifada Ugu Fudud ee Ganacsiga <span>Crypto-da</span></h1>
+            <p class="hero-subtitle">
+                Ku soo dhowow Sahal Crypto, nidaamka ugu ammaanada badan uguna dhakhsaha badan ee lagula socdo heerarka sarrifka cryptocurrency-da, loona diiwaangeliyo amarrada iibka iyo iibsashada ee ku wajahan gobolka iyo Soomaaliya oo dhan.
+            </p>
+            <div class="cta-group">
+                <a href="#download" class="btn-primary" id="mainDownloadBtn">
+                    <i class="fa-brands fa-android"></i> Degso Sahal Crypto APK
+                </a>
+                <a href="#features" class="btn-secondary">
+                    Wax badan baro <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="mockup-container">
+            <!-- App UI Simulation Wireframe/Mockup -->
+            <div class="phone-mockup">
+                <div class="mockup-header">
+                    <span>Sahal Live Rates</span>
+                    <i class="fa-solid fa-wifi" style="font-size: 0.7rem;"></i>
+                </div>
+                <div class="mockup-body">
+                    <div class="mockup-balance">
+                        <div class="mockup-balance-lbl">Hantida Isku-geynta</div>
+                        <div class="mockup-balance-amount">$30,551.42</div>
+                        <div class="mockup-balance-sub"><i class="fa-solid fa-caret-up"></i> +14.2% Maanta</div>
+                    </div>
+                    
+                    <div class="mockup-list-item">
+                        <div class="mockup-list-left">
+                            <div class="mockup-icon"><i class="fa-brands fa-btc"></i></div>
+                            <div>
+                                <div class="mockup-coin-name">Bitcoin</div>
+                                <div class="mockup-coin-symbol">BTC</div>
+                            </div>
+                        </div>
+                        <div class="mockup-coin-val">
+                            <div style="font-weight:700;">$67,492.50</div>
+                            <div style="color:var(--primary); font-size: 0.65rem;">+2.8%</div>
+                        </div>
+                    </div>
+
+                    <div class="mockup-list-item">
+                        <div class="mockup-list-left">
+                            <div class="mockup-icon"><i class="fa-brands fa-ethereum"></i></div>
+                            <div>
+                                <div class="mockup-coin-name">Ethereum</div>
+                                <div class="mockup-coin-symbol">ETH</div>
+                            </div>
+                        </div>
+                        <div class="mockup-coin-val">
+                            <div style="font-weight:700;">$3,485.10</div>
+                            <div style="color:var(--primary); font-size: 0.65rem;">+4.1%</div>
+                        </div>
+                    </div>
+
+                    <div class="mockup-list-item">
+                        <div class="mockup-list-left">
+                            <div class="mockup-icon" style="color:#26A17B; background:rgba(38,161,123,0.15)"><i class="fa-solid fa-dollar-sign"></i></div>
+                            <div>
+                                <div class="mockup-coin-name">Tether</div>
+                                <div class="mockup-coin-symbol">USDT</div>
+                            </div>
+                        </div>
+                        <div class="mockup-coin-val">
+                            <div style="font-weight:700;">$1.00</div>
+                            <div style="color:#8E9BA5; font-size: 0.65rem;">Stable</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moving Live Crypto Ticker Band -->
+    <div class="live-ticker-container">
+        <div class="live-ticker-track" id="tickerTrack">
+            <!-- Populated continuously via Javascript -->
+            <div class="ticker-item"><span class="coin">BTC/USD</span> <span class="rate">$67,492.50</span> <span class="change">+2.8%</span></div>
+            <div class="ticker-item"><span class="coin">ETH/USD</span> <span class="rate">$3,485.10</span> <span class="change">+4.1%</span></div>
+            <div class="ticker-item"><span class="coin">SOL/USD</span> <span class="rate">$152.80</span> <span class="change">+6.5%</span></div>
+            <div class="ticker-item"><span class="coin">BNB/USD</span> <span class="rate">$591.20</span> <span class="change">+1.9%</span></div>
+            <div class="ticker-item"><span class="coin">USDT/USD</span> <span class="rate">$1.00</span> <span class="change">0.0%</span></div>
+            <div class="ticker-item"><span class="coin">EVC/USD</span> <span class="rate">1.00</span> <span class="change">Live</span></div>
+        </div>
     </div>
 
-    <div id="otp-section" style="display:none;">
-        <input type="text" id="otp-code" placeholder="Geli koodhka 6-da lambar">
-        <button id="verify-code-btn">Hubi koodhka</button>
-    </div>
+    <!-- Core Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2>Adeegyo Ku Salaysan <span>Amni iyo Xawaare</span></h2>
+            <p>Sahal Crypto maahan oo kaliya boorso, ee waa nidaam dhammaystiran oo xallinaya dhammaan baahiyahaaga cryptocurrency.</p>
+        </div>
 
-    <nav class="nav-links"></nav><div id="dashboard-section" style="display: none; margin-top: 20px;">
-    <div class="dashboard-card" style="background: var(--card-bg); padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;">
-        <p style="color: #888; margin: 0;">Isku-darka Haraaga</p>
-        <h1 style="color: var(--primary); margin: 10px 0;">8,099.00 USDT</h1>
-        <p style="color: #888; margin: 0;">≈ 8,099.00 USD <span style="color: var(--primary);">+4.25%</span></p>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-        <button style="background: var(--card-bg); color: white; padding: 15px; border-radius: 10px; border: none;">Libso Crypto</button>
-        <button style="background: var(--card-bg); color: white; padding: 15px; border-radius: 10px; border: none;">Libi / Lacag bixi</button>
-    </div>
-</div>
+        <div class="features-grid">
+            <!-- Feature Card 1 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Amni aad u Sareeya (Security)</h3>
+                <p>Nidaamka Sahal wuxuu adeegsadaa codeeynta amniga ugu sarraysa. Dhammaan xogahaaga gaarka ah waxay ku keydsan yihiin gudaha sanduuqa deegaanka ammaan ee taleefankaaga adoo adeegsanaya Room Database, iyadoo aan cid kale helgeli karin.</p>
+            </div>
 
+            <!-- Feature Card 2 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3>Xawaare Dhaqso Badan (Fast Transactions)</h3>
+                <p>Diiwaangeli amaradaada iibka iyo iibsashada adigoo isticmaalaya screenshots-ka cadaymaha EVC Plus ama lacag-bixinta gacanta. Iska ilow dib-u-dhaca, nidaamkayagu wuxaa u shaqeeyaa si otomaatig ah oo ansixintu waa daqiiqado.</p>
+            </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+            <!-- Feature Card 3 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3>Taageero 24/7 Ah (Support Widget)</h3>
+                <p>Kooxdayada caawinaadda ee Sahal Crypto waxay diyaar kuu yihiin maalin iyo habeenba. Si toos ah uga bilow wada hadalka app-ka dhexdiisa adoo adeegsanaya WhatsApp-ka kooxda maamulka si dhib kasta lagugu xalliyo si dhakhso ah.</p>
+            </div>
+        </div>
+    </section>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCCSwkI6G5EifxnPuOHiHm4JsubS_jkeaW",
-            authDomain: "sahal-crypto-exchange.firebaseapp.com",
-            projectId: "sahal-crypto-exchange",
-            storageBucket: "sahal-crypto-exchange.appspot.com",
-            messagingSenderId: "349841304186",
-            appId: "1:349841304186:web:aab9d616bfb09fc230a9c3"
-        };
+    <!-- Installation & Quick Instruction Guide -->
+    <section class="install-section" id="guide">
+        <div class="install-container">
+            <div class="install-header">
+                <h2>Habka Dejinta <span>Waa mid aad u Sahlan</span></h2>
+                <p>Fadlan raac tilmaamahan kooban si aad ugu rakibato Sahal Crypto si ammaan ah taleefankaaga Android.</p>
+                
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-num">01</div>
+                        <div class="step-text">
+                            <h4>Deji Faylka APK</h4>
+                            <p>Guji badanka "Download APK" ee hoose ama sare si aad u bilowdo soo dejinta faylka rasmiga ah ee barnaamijka.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">02</div>
+                        <div class="step-text">
+                            <h4>Oggolow Ilaha aan la aqoon (Unknown Sources)</h4>
+                            <p>Aad qaybta "Settings" ee taleefankaaga -> "Security" -> kisha oggolaanshaha "Install Unknown Apps" si uu ugu oggolaado browser-ka inuu ku rakibo APK.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">03</div>
+                        <div class="step-text">
+                            <h4>Rakib oo ku Raaxayso Barnaamijka</h4>
+                            <p>Fura faylka aad soo dejisay oo guji "Install". Markuu dhameeyo fura, waxaadna diyaar u tay inaad gasho suuqa cryptocurrency si sahlan!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+            <!-- QR Sidebar representation card to scan download directly -->
+            <div class="qr-card-widget" id="download">
+                <div class="qr-placeholder">
+                    <!-- Dynamic inline high-tech custom SVG matching mint system -->
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="100" height="100" fill="#FFFFFF"/>
+                        <!-- Outermost corners -->
+                        <rect x="10" y="10" width="25" height="25" fill="#0B0E11"/>
+                        <rect x="15" y="15" width="15" height="15" fill="#FFFFFF"/>
+                        <rect x="18" y="18" width="9" height="9" fill="#00C087"/>
+                        
+                        <rect x="65" y="10" width="25" height="25" fill="#0B0E11"/>
+                        <rect x="70" y="15" width="15" height="15" fill="#FFFFFF"/>
+                        <rect x="73" y="18" width="9" height="9" fill="#00C087"/>
 
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-btn', { 'size': 'invisible' });
+                        <rect x="10" y="65" width="25" height="25" fill="#0B0E11"/>
+                        <rect x="15" y="70" width="15" height="15" fill="#FFFFFF"/>
+                        <rect x="18" y="73" width="9" height="9" fill="#00C087"/>
 
-        document.getElementById('send-code-btn').addEventListener('click', () => {
-            const phoneNumber = document.getElementById('phone-number').value;
-            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-            .then((confirmationResult) => {
-                window.confirmationResult = confirmationResult;
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('otp-section').style.display = 'block';
-            }).catch((error) => { alert("Khalad: " + error.message); });
+                        <!-- Simulated randomized QR modules matching real patterns layout -->
+                        <rect x="42" y="10" width="6" height="6" fill="#00C087"/>
+                        <rect x="52" y="16" width="6" height="12" fill="#0B0E11"/>
+                        <rect x="42" y="26" width="12" height="6" fill="#0B0E11"/>
+                        <rect x="40" y="40" width="20" height="20" fill="#00C087"/>
+                        <rect x="45" y="45" width="10" height="10" fill="#0B0E11"/>
+
+                        <rect x="70" y="45" width="12" height="6" fill="#0B0E11"/>
+                        <rect x="80" y="55" width="10" height="10" fill="#00C087"/>
+                        <rect x="10" y="45" width="14" height="6" fill="#0B0E11"/>
+                        <rect x="20" y="55" width="6" height="6" fill="#00C087"/>
+                        
+                        <rect x="65" y="65" width="15" height="6" fill="#0B0E11"/>
+                        <rect x="80" y="75" width="10" height="15" fill="#00C087"/>
+                    </svg>
+                </div>
+                <h3 style="margin-bottom: 0.5rem; font-weight:800;">Sawir QR Code si aad u soo dejiso</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 300px;">
+                    Ku calamee kamarada taleefankaaga si toos ah si aad u kala soo degto barnaamijka mareegtayada rasmiga ah.
+                </p>
+
+                <!-- Anchor Download linking to direct APK -->
+                <a href="SahalCrypto.apk" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-circle-down"></i> Kala soo deg APK (Halkan Guji)
+                </a>
+
+                <div class="download-meta">
+                    <span><i class="fa-solid fa-microchip"></i> Cabirka: ~12 MB</span>
+                    <span><i class="fa-solid fa-code-commit"></i> Version: v1.0.4 rasmiga</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area and legal notice specifications -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">
+                <i class="fa-solid fa-cubes"></i> Sahal <span>Crypto</span>
+            </a>
+            <div class="footer-links">
+                <a href="#features">Adeegyada</a>
+                <a href="#guide">Ku-Rakibidda</a>
+                <a href="https://sahalcrypt.com">Deep-linking Link</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 <span>Sahal Crypto</span>. Dhammaan xuquuqda waa dhowran yihiin. Official Domain: sahalcrypt.com</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">
+                Waa goobta rasmiga ah ee damaanad qaadaysa soo dejinta faylalka nidaamka. Fadlan ka fogow ilaha aan la aaminin.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Ticker dynamic populator script for true live-rate emulation -->
+    <script>
+        // Smoothly double the items in progress track to ensure flawless continuous carousel loop
+        const track = document.getElementById('tickerTrack');
+        const originalContent = track.innerHTML;
+        track.innerHTML = originalContent + originalContent;
+
+        // Custom Event handler for download tracing
+        document.getElementById('mainDownloadBtn').addEventListener('click', function() {
+            console.log('Download triggered for SahalCrypto.apk');
         });
 
-        document.getElementById('verify-code-btn').addEventListener('click', () => {
-            const code = document.getElementById('otp-code').value;
-            window.confirmationResult.confirm(code).then((result) => {
-                localStorage.setItem('sahal_authenticated', 'true');
-                localStorage.setItem('sahal_username', result.user.phoneNumber);
-                alert("Si guul leh ayaad u gashay!");
-                window.location.reload();
-            }).catch((error) => { alert("Koodhkaagu waa qaldan yahay!"); });
+        // Live User Session Integration for Header Navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = localStorage.getItem('sahal_authenticated');
+            if (isAuthenticated) {
+                const username = localStorage.getItem('sahal_username') || 'Macaamil';
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks) {
+                    // Create stylish user greeting badge inside the menu
+                    const greeting = document.createElement('span');
+                    greeting.className = 'user-greeting';
+                    greeting.style.color = 'var(--primary)';
+                    greeting.style.fontWeight = '700';
+                    greeting.style.fontSize = '0.9rem';
+                    greeting.style.display = 'inline-flex';
+                    greeting.style.alignItems = 'center';
+                    greeting.style.gap = '6px';
+                    greeting.style.marginRight = '8px';
+                    greeting.style.padding = '4px 10px';
+                    greeting.style.borderRadius = '6px';
+                    greeting.style.background = 'rgba(0, 192, 135, 0.08)';
+                    greeting.style.border = '1px solid rgba(0, 192, 135, 0.15)';
+                    greeting.innerHTML = `<i class="fa-solid fa-user-circle"></i> Sannu, ${username}`;
+                    
+                    // Create stylish red logout link
+                    const logoutBtn = document.createElement('a');
+                    logoutBtn.href = '#';
+                    logoutBtn.className = 'logout-nav-btn';
+                    logoutBtn.style.color = '#ff4d4d';
+                    logoutBtn.style.fontWeight = '600';
+                    logoutBtn.style.fontSize = '0.95rem';
+                    logoutBtn.style.cursor = 'pointer';
+                    logoutBtn.style.textDecoration = 'none';
+                    logoutBtn.style.transition = 'color 0.2s';
+                    logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Ka bax';
+                    
+                    logoutBtn.addEventListener('mouseenter', () => {
+                        logoutBtn.style.color = '#ff6666';
+                    });
+                    logoutBtn.addEventListener('mouseleave', () => {
+                        logoutBtn.style.color = '#ff4d4d';
+                    });
+
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        localStorage.removeItem('sahal_authenticated');
+                        localStorage.removeItem('sahal_username');
+                        localStorage.removeItem('sahal_user_email');
+                        window.location.href = 'login.html';
+                    });
+                    
+                    navLinks.insertBefore(greeting, navLinks.firstChild);
+                    navLinks.appendChild(logoutBtn);
+                }
+            }
         });
-
-        // Logout iyo Session Script
-        const isAuthenticated = localStorage.getItem('sahal_authenticated');// Qari login-ka haddii qofku uu soo galay
-if (isAuthenticated) {
-    document.getElementById('login-section').style.display = 'none';
-}
-
-        if (isAuthenticated) {
-            const navLinks = document.querySelector('.nav-links');
-            const logoutBtn = document.createElement('a');
-            logoutBtn.href = '#';
-            logoutBtn.innerHTML = 'Ka bax';
-            logoutBtn.onclick = () => {
+    </script>
+</body>
+</html>
