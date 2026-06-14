@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="so">
 <head>
@@ -10,25 +9,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahal Crypto | Official App Landing Page & Official Site</title>
-    
-    <!-- SEO Optimization Meta Tags -->
-    <meta name="description" content="Sahal Crypto waa barnaamijka rasmiga ah ee kuu oggolaanaya inaad si sahlan oo ammaan ah ula socoto, u iibsato, una iibiso lacagaha qoraal-gacmeedka ah (Cryptocurrencies). Kala soo bix barnaamijka rasmiga ah halkan.">
-    <meta name="keywords" content="Sahal Crypto, sahalcrypt.com, Somalia Crypto, EVC Plus Crypto, Bitcoin Somalia, Sahal Crypto APK download, official Sahal Crypto app">
-    <meta name="author" content="Sahal Crypto Team">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sahalcrypt.com/">
-    <meta property="og:title" content="Sahal Crypto - Kala Soo Deg App-ka Rasmiga Ah">
-    <meta property="og:description" content="Nidaamka ugu fudud, uguna ammaanada badan ee ku saabsan ganacsiga lacagaha dhijitaalka ah gudaha Soomaaliya.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=600&auto=format&fit=crop">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://sahalcrypt.com/">
-    <meta property="twitter:title" content="Sahal Crypto - App-ka Rasmiga Ah">
-    <meta property="twitter:description" content="Ku soco xawaarihii ugu dambeeyay ee suuqyada caalamiga ah adigoo isticmaalaya Sahal Crypto.">
+    <title>Sahal Crypto | Dashboard-ka Rasmiga Ah</title>
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,1013 +19,1994 @@
 
     <style>
         :root {
-            --bg-color: #0B0E11; /* Deep Charcoal */
-            --bg-card: #151A21; /* Dark Card Grey */
-            --primary: #00C087; /* Mint Green */
-            --primary-hover: #00E6A1; /* Lighter Mint Green */
-            --text-main: #F0F3F5; /* Soft High Contrast White */
-            --text-muted: #8E9BA5; /* Muted Slate Gray */
-            --border-color: rgba(0, 192, 135, 0.15); /* Soft Mint Border */
+            --bg-color: #0B0E11; /* Deep Modern Charcoal */
+            --bg-card: #151A21; /* High Quality Dark Card */
+            --bg-input: #1B222B; /* Dark Blue-Gray Input */
+            --primary: #00C087; /* Sahal Mint Green */
+            --primary-hover: #00E6A1;
+            --primary-light: rgba(0, 192, 135, 0.1);
+            --primary-border: rgba(0, 192, 135, 0.2);
+            --danger: #FF4D4D; /* Warm Red */
+            --text-main: #F0F3F5; /* Highly Readable White */
+            --text-muted: #8E9BA5; /* Slate Gray */
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: var(--font-main);
             background-color: var(--bg-color);
             color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
-            line-height: 1.6;
+            padding-bottom: 75px; /* Spacing for Bottom Navigation on Mobile */
         }
 
-        /* Ambient Glow Backgrounds */
-        .ambient-glow-1 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 192, 135, 0.08) 0%, rgba(11, 14, 17, 0) 70%);
-            top: -100px;
-            right: -100px;
-            z-index: -1;
+        /* Responsive Frame for Desktop Layout */
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0;
+                display: grid;
+                grid-template-columns: 260px 1fr;
+            }
         }
 
-        .ambient-glow-2 {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 192, 135, 0.05) 0%, rgba(11, 14, 17, 0) 70%);
-            bottom: 10%;
-            left: -200px;
-            z-index: -1;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(142, 155, 165, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
 
-        /* Header / Navbar */
-        header {
-            border-bottom: 1px solid rgba(142, 155, 165, 0.1);
+        /* Sidebar Navigation - Tablet/Desktop ONLY */
+        .sidebar {
+            display: none;
+            background-color: var(--bg-card);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            height: 100vh;
             position: sticky;
             top: 0;
-            background: rgba(11, 14, 17, 0.9);
-            backdrop-filter: blur(12px);
             z-index: 100;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.25rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        @media (min-width: 768px) {
+            .sidebar {
+                display: flex;
+            }
         }
 
-        .logo {
+        .sidebar-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: var(--text-main);
             font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -0.5px;
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
         }
 
-        .logo span {
-            color: var(--primary);
-        }
-
-        .logo i {
+        .sidebar-brand i {
             color: var(--primary);
             font-size: 1.8rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
+        .sidebar-brand span {
+            color: var(--primary);
         }
 
-        .nav-links a {
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex-grow: 1;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.9rem 1.2rem;
+            color: var(--text-muted);
             text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            transition: color 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .download-nav-btn {
-            background-color: rgba(0, 192, 135, 0.1);
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 0.5rem 1.25rem;
-            border-radius: 8px;
             font-weight: 600;
-            transition: all 0.2s ease;
+            border-radius: 12px;
+            transition: all 0.25s ease;
+            cursor: pointer;
         }
 
-        .download-nav-btn:hover {
-            background-color: var(--primary);
-            color: #000;
-            transform: translateY(-1px);
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--text-main);
+            background-color: var(--primary-light);
+            box-shadow: inset 3px 0 0 var(--primary);
         }
 
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem 6rem;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            align-items: center;
-            gap: 4rem;
+        .sidebar-link i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-content h1 span {
+        .sidebar-link.active i {
             color: var(--primary);
         }
 
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 580px;
-        }
-
-        .cta-group {
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1.5rem;
             display: flex;
+            flex-direction: column;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: #050709;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-            border: none;
-            box-shadow: 0 4px 20px rgba(0, 192, 135, 0.25);
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0, 192, 135, 0.35);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(142, 155, 165, 0.2);
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            background-color: rgba(0, 192, 135, 0.03);
-            transform: translateY(-2px);
-        }
-
-        /* Mockup Representation */
-        .mockup-container {
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .phone-mockup {
-            width: 290px;
-            height: 580px;
-            background-color: #080A0D;
-            border: 10px solid #232D37;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 192, 135, 0.1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Screen Contents */
-        .mockup-header {
-            background-color: #12181E;
-            padding: 15px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mockup-body {
-            flex: 1;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background-color: #0B0E11;
-        }
-
-        .mockup-balance {
-            background: linear-gradient(135deg, #151A21 0%, #12161D 100%);
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 16px;
-        }
-
-        .mockup-balance-lbl {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .mockup-balance-amount {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin: 4px 0;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .mockup-balance-sub {
-            font-size: 0.75rem;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .mockup-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #151A21;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border-left: 3px solid var(--primary);
-        }
-
-        .mockup-list-left {
+        .user-badge {
             display: flex;
             align-items: center;
             gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .mockup-icon {
-            width: 28px;
-            height: 28px;
+        .avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), #00A3F5);
             border-radius: 50%;
-            background: rgba(0, 192, 135, 0.15);
-            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-weight: 800;
+            color: #050709;
+            font-size: 0.95rem;
         }
 
-        .mockup-coin-name {
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .mockup-coin-symbol {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        .mockup-coin-val {
-            text-align: right;
-            font-size: 0.8rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Real-time Ticker Bar on Landing Page */
-        .live-ticker-container {
-            background-color: #151A21;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
+        .user-meta {
             overflow: hidden;
-            position: relative;
         }
 
-        .live-ticker-track {
-            display: flex;
-            gap: 3rem;
-            animation: tickerScroll 25s linear infinite;
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 700;
             white-space: nowrap;
-            width: max-content;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
-        .ticker-item {
+        .user-email {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .btn-logout {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.95rem;
+            padding: 0.8rem 1.2rem;
+            color: var(--danger);
+            text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            transition: background 0.25s ease;
+            width: 100%;
+            border: none;
+            background: transparent;
+            cursor: pointer;
         }
 
-        .ticker-item span.coin {
-            font-weight: 850;
+        .btn-logout:hover {
+            background: rgba(255, 77, 77, 0.08);
         }
 
-        .ticker-item span.rate {
-            font-family: 'JetBrains Mono', monospace;
+        /* Mobile Header */
+        .mobile-header {
+            background-color: var(--bg-card);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+        }
+
+        .mobile-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .mobile-brand i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .mobile-brand span {
             color: var(--primary);
         }
 
-        .ticker-item span.change {
+        .mobile-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-circle-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.25s;
+        }
+
+        .icon-circle-btn:active {
+            transform: scale(0.92);
+            background: rgba(0, 192, 135, 0.1);
+            color: var(--primary);
+        }
+
+        .notification-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Mobile Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-card);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            text-decoration: none;
             font-size: 0.75rem;
-            padding: 2px 6px;
-            background-color: rgba(0, 192, 135, 0.1);
-            color: var(--primary);
-            border-radius: 4px;
+            font-weight: 600;
+            flex: 1;
+            padding: 4px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        /* Features Section */
-        .features-section {
+        .nav-item i {
+            font-size: 1.3rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Workspace */
+        main {
+            padding: 1.5rem;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 6rem 2rem;
-            text-align: center;
-            position: relative;
         }
 
-        .section-header {
-            margin-bottom: 4rem;
+        @media (min-width: 768px) {
+            main {
+                padding: 2.5rem;
+                height: 100vh;
+                overflow-y: auto;
+            }
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+        /* App Sections/Views */
+        .app-view {
+            display: none;
+            animation: fadeIn 0.35s ease-out;
         }
 
-        .section-header h2 span {
-            color: var(--primary);
+        .app-view.active {
+            display: block;
         }
 
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
+        /* SECTION: Dashboard View Components */
+        /* Balance Container Card */
+        .balance-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1c242e 100%);
+            border: 1px solid var(--primary-border);
             border-radius: 20px;
-            text-align: left;
-            transition: all 0.3s ease;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 192, 135, 0.05);
         }
 
-        .feature-card::before {
+        .balance-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 192, 135, 0.1) 0%, rgba(0,0,0,0) 70%);
+            bottom: -20px;
+            right: -20px;
+            pointer-events: none;
+        }
+
+        .balance-header {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .balance-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 0.4rem;
+        }
+
+        .balance-value {
+            font-size: 2.2rem;
+            font-family: var(--font-main);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .percentage-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 192, 135, 0.12);
+            border: 1px solid rgba(0, 192, 135, 0.2);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-family: var(--font-mono);
+        }
+
+        .currency-equivalent {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        /* Global Floating Decorative Download Area */
+        .apk-banner-quick {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(0, 192, 135, 0.1) 0%, rgba(11, 14, 17, 0.5) 100%);
+            border: 1px dashed var(--primary-border);
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .apk-banner-quick a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .apk-banner-quick a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Refresh Live Rates Bar */
+        .refresh-rates-bar {
             width: 100%;
-            height: 3px;
-            background: var(--primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px -10px rgba(0, 192, 135, 0.12);
-            border-color: rgba(0, 192, 135, 0.4);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon-wrapper {
-            background-color: rgba(0, 192, 135, 0.08);
-            width: 60px;
-            height: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            font-size: 1.6rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.35rem;
+            gap: 8px;
+            font-size: 0.88rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            color: var(--primary);
+            transition: all 0.25s;
+            cursor: pointer;
+            user-select: none;
+            margin-bottom: 2rem;
         }
 
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.55;
+        .refresh-rates-bar:active {
+            transform: scale(0.98);
+            background: rgba(0, 192, 135, 0.05);
         }
 
-        /* Installation Guide & CTA */
-        .install-section {
-            background-color: #0E1217;
-            border-top: 1px solid rgba(142, 155, 165, 0.1);
-            border-bottom: 1px solid rgba(142, 155, 165, 0.1);
-            padding: 6rem 2rem;
+        .spin {
+            animation: rotating 0.8s linear;
         }
 
-        .install-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        @keyframes rotating {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Rapid Ticker Row Grid */
+        .ticker-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .ticker-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .ticker-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: border-color 0.25s;
+            cursor: pointer;
+        }
+
+        .ticker-card:hover {
+            border-color: var(--primary-border);
+        }
+
+        .ticker-name {
+            display: flex;
             align-items: center;
-            gap: 4rem;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
         }
 
-        .install-header h2 {
-            font-size: 2.3rem;
+        .ticker-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ticker-label img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .ticker-price {
+            font-size: 1.15rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            color: white;
         }
 
-        .install-header h2 span {
+        .ticker-change {
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+        }
+
+        .ticker-change.up {
             color: var(--primary);
         }
 
-        .install-header p {
+        .ticker-change.down {
+            color: var(--danger);
+        }
+
+        /* 4-Item Services Matrix Grid (Dashboard Actions) */
+        .dashboard-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2.2rem;
+        }
+
+        .action-grid-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-grid-card:hover, .action-grid-card:active {
+            border-color: var(--primary-border);
+            background-color: rgba(255, 255, 255, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .action-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .action-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background-color: rgba(0, 192, 135, 0.08);
+            border: 1px solid rgba(0, 192, 135, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .action-icon-box.withdraw {
+            background-color: rgba(0, 163, 245, 0.08); /* Ocean Blue Withdraw look */
+            border-color: rgba(0, 163, 245, 0.15);
+            color: #00A3F5;
+        }
+
+        .action-icon-box.p2p {
+            background-color: rgba(255, 179, 0, 0.08); /* Amber Yellow style */
+            border-color: rgba(255, 179, 0, 0.15);
+            color: #FFB300;
+        }
+
+        .action-icon-box.scan {
+            background-color: rgba(162, 0, 255, 0.08); /* Purple Scan QR design */
+            border-color: rgba(162, 0, 255, 0.15);
+            color: #A200FF;
+        }
+
+        .action-grid-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .action-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .action-subtitle {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        /* Recent Activity Title Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .section-link {
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .section-link:hover {
+            text-decoration: underline;
+            color: var(--primary-hover);
+        }
+
+        /* Transaction List */
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .transaction-item {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.25s;
+        }
+
+        .transaction-item:hover {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .txn-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .txn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.05rem;
         }
 
-        .steps-container {
+        .txn-icon.in {
+            background-color: rgba(0, 192, 135, 0.08);
+            border: 1px solid rgba(0, 192, 135, 0.15);
+            color: var(--primary);
+        }
+
+        .txn-icon.out {
+            background-color: rgba(255, 77, 77, 0.08);
+            border: 1px solid rgba(255, 77, 77, 0.15);
+            color: var(--danger);
+        }
+
+        .txn-detail {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 3px;
         }
 
-        .step-item {
+        .txn-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .txn-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .txn-right {
             display: flex;
-            gap: 1.25rem;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
         }
 
-        .step-num {
-            width: 36px;
-            height: 36px;
-            background-color: rgba(0, 192, 135, 0.12);
+        .txn-amount {
+            font-size: 0.98rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+        }
+
+        .txn-amount.plus {
             color: var(--primary);
-            border-radius: 50%;
+        }
+
+        .txn-amount.minus {
+            color: var(--danger);
+        }
+
+        .txn-status {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        .txn-status.completed {
+            background-color: rgba(0, 192, 135, 0.08);
+            color: var(--primary);
+        }
+
+        .txn-status.pending {
+            background-color: rgba(255, 179, 0, 0.08);
+            color: #FFB300;
+        }
+
+        /* SECTION: Boorsada (Wallet) View Components */
+        .assets-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .asset-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .asset-left-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .asset-icon-brand {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-            font-family: 'JetBrains Mono', monospace;
-            border: 1px solid var(--border-color);
+            font-size: 1.3rem;
+            font-weight: bolder;
+            background-color: #1b222b;
         }
 
-        .step-text h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
+        .asset-icon-brand.usdt { background: rgba(0, 192, 135, 0.1); color: var(--primary); }
+        .asset-icon-brand.btc { background: rgba(255, 179, 0, 0.1); color: #FFB300; }
+        .asset-icon-brand.eth { background: rgba(162, 0, 255, 0.1); color: #A200FF; }
 
-        .step-text p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Trust Banner & QR Code */
-        .qr-card-widget {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: 24px;
+        .asset-titles {
             display: flex;
             flex-direction: column;
+            gap: 3px;
+        }
+
+        .asset-code {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .asset-fullname {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .asset-right-values {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .asset-balance {
+            font-size: 1.15rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: white;
+        }
+
+        .asset-fiat {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        .wallet-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-wallet-action {
+            padding: 1rem;
+            border-radius: 14px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-wallet-action.deposit {
+            background-color: var(--primary);
+            color: #050709;
+        }
+
+        .btn-wallet-action.deposit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-wallet-action.withdraw {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .btn-wallet-action.withdraw:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Somali Accounts Card */
+        .somali-fiat-accounts {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            padding: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .fiat-account-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .fiat-account-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .fiat-account-row:first-child {
+            padding-top: 0;
+        }
+
+        .fiat-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .fiat-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .fiat-avatar.evc { background-color: rgba(0, 192, 135, 0.12); color: var(--primary); }
+        .fiat-avatar.edahab { background-color: rgba(0, 163, 245, 0.12); color: #00A3F5; }
+
+        .fiat-balance {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: white;
+        }
+
+        /* SECTION: Suuqa (Market) View Components */
+        .market-search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .market-search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .market-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 42px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background-color: var(--bg-input);
+            color: white;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: all 0.25s;
+        }
+
+        .market-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 192, 135, 0.1);
+        }
+
+        .filter-tabs-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 1.5rem;
+            scrollbar-width: none;
+        }
+
+        .filter-tabs-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab-pill {
+            padding: 8px 16px;
+            border-radius: 30px;
+            background-color: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab-pill.active {
+            background-color: var(--primary);
+            color: #050709;
+            border-color: var(--primary);
+        }
+
+        .market-list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .market-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .market-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .market-row:hover {
+            background-color: rgba(255,255,255,0.015);
+        }
+
+        .market-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .coin-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            background-color: var(--bg-input);
+        }
+
+        .coin-icon.usdt { background: rgba(0, 192, 135, 0.08); color: var(--primary); }
+        .coin-icon.btc { background: rgba(255, 179, 0, 0.08); color: #FFB300; }
+        .coin-icon.eth { background: rgba(162, 0, 255, 0.08); color: #A200FF; }
+        .coin-icon.sol { background: rgba(0, 224, 255, 0.08); color: #00E0FF; }
+        .coin-icon.bnb { background: rgba(243, 186, 47, 0.08); color: #F3BA2F; }
+
+        .coin-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .coin-symbol {
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .coin-name {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .market-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .coin-price {
+            font-size: 1.05rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: white;
+        }
+
+        .coin-change-pill {
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+        }
+
+        .coin-change-pill.up { color: var(--primary); }
+        .coin-change-pill.down { color: var(--danger); }
+
+        /* SECTION: Ganacsiga (Trade) View Components */
+        .trade-container {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 1.8rem;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .trade-direction-tabs {
+            display: flex;
+            background-color: rgba(11, 14, 17, 0.6);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .trade-dir-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .trade-dir-btn.active.buy {
+            background-color: var(--primary);
+            color: #050709;
+        }
+
+        .trade-dir-btn.active.sell {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .trade-select, .trade-input-field {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background-color: var(--bg-input);
+            color: white;
+            font-family: var(--font-main);
+            font-size: 0.98rem;
+            transition: border-color 0.25s;
+        }
+
+        .trade-select:focus, .trade-input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .input-with-badge {
+            position: relative;
+        }
+
+        .input-badge {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .trade-quote-details {
+            background-color: rgba(11, 14, 17, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quote-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .quote-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .quote-value {
+            font-weight: 700;
+            color: white;
+            font-family: var(--font-mono);
+        }
+
+        .quote-value.highlight {
+            color: var(--primary);
+        }
+
+        .btn-submit-trade {
+            width: 100%;
+            padding: 1.1rem;
+            border-radius: 14px;
+            border: none;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-submit-trade.buy {
+            background-color: var(--primary);
+            color: #050709;
+        }
+
+        .btn-submit-trade.buy:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-submit-trade.sell {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-submit-trade.sell:hover {
+            opacity: 0.9;
+        }
+
+        /* CUSTOM MODALS SYSTEM (Interactables) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--primary-border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            padding: 1.8rem;
+            position: relative;
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            color: white;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .modal-header {
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        /* Success & Feedback Overlay screens */
+        .status-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-color);
+            z-index: 300;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
             text-align: center;
         }
 
-        .qr-placeholder {
-            width: 180px;
-            height: 180px;
-            background-color: white;
-            padding: 10px;
-            border-radius: 12px;
+        .status-overlay.active {
+            display: flex;
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 192, 135, 0.1);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0, 192, 135, 0.15);
+            animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* SVG generated dynamic representation of QR Code matching theme colors */
-        .qr-placeholder svg {
-            width: 100%;
-            height: 100%;
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
         }
 
-        /* App download metadata status */
-        .download-meta {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .download-meta span i {
-            color: var(--primary);
-            margin-right: 4px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--bg-color);
-            padding: 4rem 2rem 2rem;
-            border-top: 1px solid rgba(142, 155, 165, 0.05);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(142, 155, 165, 0.05);
-        }
-
-        .footer-logo {
-            text-decoration: none;
-            color: var(--text-main);
+        .status-title {
+            font-size: 1.5rem;
             font-weight: 800;
-            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 0.5rem;
         }
 
-        .footer-logo span {
-            color: var(--primary);
+        .status-message {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.8rem;
+            max-width: 320px;
         }
 
-        .footer-links {
+        .btn-status-done {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            border: none;
+            background-color: var(--primary);
+            color: #050709;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-status-done:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* QR Scanner Simulator */
+        .qr-scanner-box {
+            border: 2px dashed rgba(0, 192, 135, 0.4);
+            border-radius: 12px;
+            height: 200px;
+            background: rgba(0, 192, 135, 0.02);
+            position: relative;
+            overflow: hidden;
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 1.5rem;
         }
 
-        .footer-links a {
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+            animation: scanMove 2s infinite linear;
+        }
+
+        @keyframes scanMove {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+
+        /* Simple utilities */
+        .text-up { color: var(--primary) !important; }
+        .text-down { color: var(--danger) !important; }
+
+        .market-p2p-badge {
+            background-color: rgba(255, 179, 0, 0.1);
+            color: #FFB300;
+            border: 1px solid rgba(255, 179, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }/* Mobile Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-card);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex: 1;
+            padding: 4px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .footer-links a:hover {
+        .nav-item i {
+            font-size: 1.3rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
             color: var(--primary);
         }
 
-        .footer-bottom {
+        .nav-item.active i {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Workspace */
+        main {
+            padding: 1.5rem;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                padding: 2.5rem;
+                height: 100vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* App Sections/Views */
+        .app-view {
+            display: none;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        .app-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SECTION: Dashboard View Components */
+        /* Balance Container Card */
+        .balance-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1c242e 100%);
+            border: 1px solid var(--primary-border);
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 192, 135, 0.05);
+        }
+
+        .balance-card::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 192, 135, 0.1) 0%, rgba(0,0,0,0) 70%);
+            bottom: -20px;
+            right: -20px;
+            pointer-events: none;
+        }
+
+        .balance-header {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .balance-row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: baseline;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .balance-value {
+            font-size: 2.2rem;
+            font-family: var(--font-main);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .percentage-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 192, 135, 0.12);
+            border: 1px solid rgba(0, 192, 135, 0.2);
+            color: var(--primary);
+            font-weight: 700;
             font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-family: var(--font-mono);
+        }
+
+        .currency-equivalent {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        /* Global Floating Decorative Download Area */
+        .apk-banner-quick {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(0, 192, 135, 0.1) 0%, rgba(11, 14, 17, 0.5) 100%);
+            border: 1px dashed var(--primary-border);
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .apk-banner-quick a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .apk-banner-quick a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Refresh Live Rates Bar */
+        .refresh-rates-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.25s;
+            cursor: pointer;
+            user-select: none;
+            margin-bottom: 2rem;
+        }
+
+        .refresh-rates-bar:active {
+            transform: scale(0.98);
+            background: rgba(0, 192, 135, 0.05);
+        }
+
+        .spin {
+            animation: rotating 0.8s linear;
+        }
+
+        @keyframes rotating {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Rapid Ticker Row Grid */
+        .ticker-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .ticker-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .ticker-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: border-color 0.25s;
+            cursor: pointer;
+        }
+
+        .ticker-card:hover {
+            border-color: var(--primary-border);
+        }
+
+        .ticker-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--text-muted);
         }
 
-        .footer-bottom p span {
+        .ticker-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ticker-label img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+
+        .ticker-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: white;
+        }
+
+        .ticker-change {
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+        }
+
+        .ticker-change.up {
             color: var(--primary);
         }
 
-        /* Responsive Layouts */
-        @media (max-width: 968px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-                padding-top: 3rem;
-            }
-
-            .hero-subtitle {
-                margin: 0 auto 2.5rem;
-            }
-
-            .cta-group {
-                justify-content: center;
-            }
-
-            .install-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .qr-card-widget {
-                max-width: 450px;
-                margin: 0 auto;
-                width: 100%;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        .ticker-change.down {
+            color: var(--danger);
         }
 
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 2.3rem;
-            }
-
-            .cta-group .btn-primary, .cta-group .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-links {
-                display: none; /* Mobile navigation simplified */
-            }
+        /* 4-Item Services Matrix Grid (Dashboard Actions) */
+        .dashboard-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2.2rem;
         }
 
-        @keyframes tickerScroll {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
+        .action-grid-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+
+        .action-grid-card:hover, .action-grid-card:active {
+            border-color: var(--primary-border);
+            background-color: rgba(255, 255, 255, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .action-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .action-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background-color: rgba(0, 192, 135, 0.08);
+            border: 1px solid rgba(0, 192, 135, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .action-icon-box.withdraw {
+            background-color: rgba(0, 163, 245, 0.08);
+            border-color: rgba(0, 163, 245, 0.15);
+            color: #00A3F5;
+        }
+
+        .action-icon-box.p2p {
+            background-color: rgba(255, 179, 0, 0.08);
+            border-color: rgba(255, 179, 0, 0.15);
+            color: #FFB300;
+        }
+
+        .action-icon-box.scan {
+            background-color: rgba(162, 0, 255, 0.08);
+            border-color: rgba(162, 0, 255, 0.15);
+            color: #A200FF;
+        }
+
+        .action-grid-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .action-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .action-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Recent Activity Title Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .section-link {
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .section-link:hover {
+            text-decoration: underline;
+            color: var(--primary-hover);
+        }
+
+        /* Transaction List */
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .transaction-item {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.25s;
+        }
+
+        .transaction-item:hover {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .txn-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .txn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+        }
+
+        .txn-icon.in {
+            background-color: rgba(0, 192, 135, 0.08);
+            border: 1px solid rgba(0, 192, 135, 0.15);
+            color: var(--primary);
+        }
+
+        .txn-icon.out {
+            background-color: rgba(255, 77, 77, 0.08);
+            border: 1px solid rgba(255, 77, 77, 0.15);
+            color: var(--danger);
+        }
+
+        .txn-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .txn-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .txn-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .txn-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .txn-amount {
+            font-size: 0.98rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+        }
+
+        .txn-amount.plus {
+            color: var(--primary);
+        }
+
+        .txn-amount.minus {
+            color: var(--danger);
+        }
+
+        .txn-status {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        .txn-status.completed {
+            background-color: rgba(0, 192, 135, 0.08);
+            color: var(--primary);
+        }
+
+        .txn-status.pending {
+            background-color: rgba(255, 179, 0, 0.08);
+            color: #FFB300;
+    }
     </style>
 </head>
 <body>
-
-    <!-- Ambient Ambient Glows -->
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
-
-    <!-- Top Navigation Header -->
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <i class="fa-solid fa-cubes"></i> Sahal <span>Crypto</span>
-            </a>
-            <div class="nav-links">
-                <a href="#features" class="active">Sifooyinka</a>
-                <a href="#guide">Habka Dejinta</a>
-                <a href="#download" class="download-nav-btn"><i class="fa-solid fa-download"></i> Deji APK</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Hero Landing Elements -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Sifada Ugu Fudud ee Ganacsiga <span>Crypto-da</span></h1>
-            <p class="hero-subtitle">
-                Ku soo dhowow Sahal Crypto, nidaamka ugu ammaanada badan uguna dhakhsaha badan ee lagula socdo heerarka sarrifka cryptocurrency-da, loona diiwaangeliyo amarrada iibka iyo iibsashada ee ku wajahan gobolka iyo Soomaaliya oo dhan.
-            </p>
-            <div class="cta-group">
-                <a href="#download" class="btn-primary" id="mainDownloadBtn">
-                    <i class="fa-brands fa-android"></i> Degso Sahal Crypto APK
-                </a>
-                <a href="#features" class="btn-secondary">
-                    Wax badan baro <i class="fa-solid fa-arrow-down"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="mockup-container">
-            <!-- App UI Simulation Wireframe/Mockup -->
-            <div class="phone-mockup">
-                <div class="mockup-header">
-                    <span>Sahal Live Rates</span>
-                    <i class="fa-solid fa-wifi" style="font-size: 0.7rem;"></i>
-                </div>
-                <div class="mockup-body">
-                    <div class="mockup-balance">
-                        <div class="mockup-balance-lbl">Hantida Isku-geynta</div>
-                        <div class="mockup-balance-amount">$30,551.42</div>
-                        <div class="mockup-balance-sub"><i class="fa-solid fa-caret-up"></i> +14.2% Maanta</div>
-                    </div>
-                    
-                    <div class="mockup-list-item">
-                        <div class="mockup-list-left">
-                            <div class="mockup-icon"><i class="fa-brands fa-btc"></i></div>
-                            <div>
-                                <div class="mockup-coin-name">Bitcoin</div>
-                                <div class="mockup-coin-symbol">BTC</div>
-                            </div>
-                        </div>
-                        <div class="mockup-coin-val">
-                            <div style="font-weight:700;">$67,492.50</div>
-                            <div style="color:var(--primary); font-size: 0.65rem;">+2.8%</div>
-                        </div>
-                    </div>
-
-                    <div class="mockup-list-item">
-                        <div class="mockup-list-left">
-                            <div class="mockup-icon"><i class="fa-brands fa-ethereum"></i></div>
-                            <div>
-                                <div class="mockup-coin-name">Ethereum</div>
-                                <div class="mockup-coin-symbol">ETH</div>
-                            </div>
-                        </div>
-                        <div class="mockup-coin-val">
-                            <div style="font-weight:700;">$3,485.10</div>
-                            <div style="color:var(--primary); font-size: 0.65rem;">+4.1%</div>
-                        </div>
-                    </div>
-
-                    <div class="mockup-list-item">
-                        <div class="mockup-list-left">
-                            <div class="mockup-icon" style="color:#26A17B; background:rgba(38,161,123,0.15)"><i class="fa-solid fa-dollar-sign"></i></div>
-                            <div>
-                                <div class="mockup-coin-name">Tether</div>
-                                <div class="mockup-coin-symbol">USDT</div>
-                            </div>
-                        </div>
-                        <div class="mockup-coin-val">
-                            <div style="font-weight:700;">$1.00</div>
-                            <div style="color:#8E9BA5; font-size: 0.65rem;">Stable</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Moving Live Crypto Ticker Band -->
-    <div class="live-ticker-container">
-        <div class="live-ticker-track" id="tickerTrack">
-            <!-- Populated continuously via Javascript -->
-            <div class="ticker-item"><span class="coin">BTC/USD</span> <span class="rate">$67,492.50</span> <span class="change">+2.8%</span></div>
-            <div class="ticker-item"><span class="coin">ETH/USD</span> <span class="rate">$3,485.10</span> <span class="change">+4.1%</span></div>
-            <div class="ticker-item"><span class="coin">SOL/USD</span> <span class="rate">$152.80</span> <span class="change">+6.5%</span></div>
-            <div class="ticker-item"><span class="coin">BNB/USD</span> <span class="rate">$591.20</span> <span class="change">+1.9%</span></div>
-            <div class="ticker-item"><span class="coin">USDT/USD</span> <span class="rate">$1.00</span> <span class="change">0.0%</span></div>
-            <div class="ticker-item"><span class="coin">EVC/USD</span> <span class="rate">1.00</span> <span class="change">Live</span></div>
-        </div>
-    </div>
-
-    <!-- Core Features Section -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <h2>Adeegyo Ku Salaysan <span>Amni iyo Xawaare</span></h2>
-            <p>Sahal Crypto maahan oo kaliya boorso, ee waa nidaam dhammaystiran oo xallinaya dhammaan baahiyahaaga cryptocurrency.</p>
-        </div>
-
-        <div class="features-grid">
-            <!-- Feature Card 1 -->
-            <div class="feature-card">
-                <div class="feature-icon-wrapper">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h3>Amni aad u Sareeya (Security)</h3>
-                <p>Nidaamka Sahal wuxuu adeegsadaa codeeynta amniga ugu sarraysa. Dhammaan xogahaaga gaarka ah waxay ku keydsan yihiin gudaha sanduuqa deegaanka ammaan ee taleefankaaga adoo adeegsanaya Room Database, iyadoo aan cid kale helgeli karin.</p>
-            </div>
-
-            <!-- Feature Card 2 -->
-            <div class="feature-card">
-                <div class="feature-icon-wrapper">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3>Xawaare Dhaqso Badan (Fast Transactions)</h3>
-                <p>Diiwaangeli amaradaada iibka iyo iibsashada adigoo isticmaalaya screenshots-ka cadaymaha EVC Plus ama lacag-bixinta gacanta. Iska ilow dib-u-dhaca, nidaamkayagu wuxaa u shaqeeyaa si otomaatig ah oo ansixintu waa daqiiqado.</p>
-            </div>
-
-            <!-- Feature Card 3 -->
-            <div class="feature-card">
-                <div class="feature-icon-wrapper">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-                <h3>Taageero 24/7 Ah (Support Widget)</h3>
-                <p>Kooxdayada caawinaadda ee Sahal Crypto waxay diyaar kuu yihiin maalin iyo habeenba. Si toos ah uga bilow wada hadalka app-ka dhexdiisa adoo adeegsanaya WhatsApp-ka kooxda maamulka si dhib kasta lagugu xalliyo si dhakhso ah.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Installation & Quick Instruction Guide -->
-    <section class="install-section" id="guide">
-        <div class="install-container">
-            <div class="install-header">
-                <h2>Habka Dejinta <span>Waa mid aad u Sahlan</span></h2>
-                <p>Fadlan raac tilmaamahan kooban si aad ugu rakibato Sahal Crypto si ammaan ah taleefankaaga Android.</p>
-                
-                <div class="steps-container">
-                    <div class="step-item">
-                        <div class="step-num">01</div>
-                        <div class="step-text">
-                            <h4>Deji Faylka APK</h4>
-                            <p>Guji badanka "Download APK" ee hoose ama sare si aad u bilowdo soo dejinta faylka rasmiga ah ee barnaamijka.</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-num">02</div>
-                        <div class="step-text">
-                            <h4>Oggolow Ilaha aan la aqoon (Unknown Sources)</h4>
-                            <p>Aad qaybta "Settings" ee taleefankaaga -> "Security" -> kisha oggolaanshaha "Install Unknown Apps" si uu ugu oggolaado browser-ka inuu ku rakibo APK.</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-num">03</div>
-                        <div class="step-text">
-                            <h4>Rakib oo ku Raaxayso Barnaamijka</h4>
-                            <p>Fura faylka aad soo dejisay oo guji "Install". Markuu dhameeyo fura, waxaadna diyaar u tay inaad gasho suuqa cryptocurrency si sahlan!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- QR Sidebar representation card to scan download directly -->
-            <div class="qr-card-widget" id="download">
-                <div class="qr-placeholder">
-                    <!-- Dynamic inline high-tech custom SVG matching mint system -->
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0" y="0" width="100" height="100" fill="#FFFFFF"/>
-                        <!-- Outermost corners -->
-                        <rect x="10" y="10" width="25" height="25" fill="#0B0E11"/>
-                        <rect x="15" y="15" width="15" height="15" fill="#FFFFFF"/>
-                        <rect x="18" y="18" width="9" height="9" fill="#00C087"/>
-                        
-                        <rect x="65" y="10" width="25" height="25" fill="#0B0E11"/>
-                        <rect x="70" y="15" width="15" height="15" fill="#FFFFFF"/>
-                        <rect x="73" y="18" width="9" height="9" fill="#00C087"/>
-
-                        <rect x="10" y="65" width="25" height="25" fill="#0B0E11"/>
-                        <rect x="15" y="70" width="15" height="15" fill="#FFFFFF"/>
-                        <rect x="18" y="73" width="9" height="9" fill="#00C087"/>
-
-                        <!-- Simulated randomized QR modules matching real patterns layout -->
-                        <rect x="42" y="10" width="6" height="6" fill="#00C087"/>
-                        <rect x="52" y="16" width="6" height="12" fill="#0B0E11"/>
-                        <rect x="42" y="26" width="12" height="6" fill="#0B0E11"/>
-                        <rect x="40" y="40" width="20" height="20" fill="#00C087"/>
-                        <rect x="45" y="45" width="10" height="10" fill="#0B0E11"/>
-
-                        <rect x="70" y="45" width="12" height="6" fill="#0B0E11"/>
-                        <rect x="80" y="55" width="10" height="10" fill="#00C087"/>
-                        <rect x="10" y="45" width="14" height="6" fill="#0B0E11"/>
-                        <rect x="20" y="55" width="6" height="6" fill="#00C087"/>
-                        
-                        <rect x="65" y="65" width="15" height="6" fill="#0B0E11"/>
-                        <rect x="80" y="75" width="10" height="15" fill="#00C087"/>
-                    </svg>
-                </div>
-                <h3 style="margin-bottom: 0.5rem; font-weight:800;">Sawir QR Code si aad u soo dejiso</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 300px;">
-                    Ku calamee kamarada taleefankaaga si toos ah si aad u kala soo degto barnaamijka mareegtayada rasmiga ah.
-                </p>
-
-                <!-- Anchor Download linking to direct APK -->
-                <a href="SahalCrypto.apk" class="btn-primary" style="width: 100%; justify-content: center;">
-                    <i class="fa-solid fa-circle-down"></i> Kala soo deg APK (Halkan Guji)
-                </a>
-
-                <div class="download-meta">
-                    <span><i class="fa-solid fa-microchip"></i> Cabirka: ~12 MB</span>
-                    <span><i class="fa-solid fa-code-commit"></i> Version: v1.0.4 rasmiga</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Area and legal notice specifications -->
-    <footer>
-        <div class="footer-content">
-            <a href="#" class="footer-logo">
-                <i class="fa-solid fa-cubes"></i> Sahal <span>Crypto</span>
-            </a>
-            <div class="footer-links">
-                <a href="#features">Adeegyada</a>
-                <a href="#guide">Ku-Rakibidda</a>
-                <a href="https://sahalcrypt.com">Deep-linking Link</a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2026 <span>Sahal Crypto</span>. Dhammaan xuquuqda waa dhowran yihiin. Official Domain: sahalcrypt.com</p>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">
-                Waa goobta rasmiga ah ee damaanad qaadaysa soo dejinta faylalka nidaamka. Fadlan ka fogow ilaha aan la aaminin.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Ticker dynamic populator script for true live-rate emulation -->
-    <script>
-        // Smoothly double the items in progress track to ensure flawless continuous carousel loop
-        const track = document.getElementById('tickerTrack');
-        const originalContent = track.innerHTML;
-        track.innerHTML = originalContent + originalContent;
-
-        // Custom Event handler for download tracing
-        document.getElementById('mainDownloadBtn').addEventListener('click', function() {
-            console.log('Download triggered for SahalCrypto.apk');
-        });
-
-        // Live User Session Integration for Header Navigation
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = localStorage.getItem('sahal_authenticated');
-            if (isAuthenticated) {
-                const username = localStorage.getItem('sahal_username') || 'Macaamil';
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks) {
-                    // Create stylish user greeting badge inside the menu
-                    const greeting = document.createElement('span');
-                    greeting.className = 'user-greeting';
-                    greeting.style.color = 'var(--primary)';
-                    greeting.style.fontWeight = '700';
-                    greeting.style.fontSize = '0.9rem';
-                    greeting.style.display = 'inline-flex';
-                    greeting.style.alignItems = 'center';
-                    greeting.style.gap = '6px';
-                    greeting.style.marginRight = '8px';
-                    greeting.style.padding = '4px 10px';
-                    greeting.style.borderRadius = '6px';
-                    greeting.style.background = 'rgba(0, 192, 135, 0.08)';
-                    greeting.style.border = '1px solid rgba(0, 192, 135, 0.15)';
-                    greeting.innerHTML = `<i class="fa-solid fa-user-circle"></i> Sannu, ${username}`;
-                    
-                    // Create stylish red logout link
-                    const logoutBtn = document.createElement('a');
-                    logoutBtn.href = '#';
-                    logoutBtn.className = 'logout-nav-btn';
-                    logoutBtn.style.color = '#ff4d4d';
-                    logoutBtn.style.fontWeight = '600';
-                    logoutBtn.style.fontSize = '0.95rem';
-                    logoutBtn.style.cursor = 'pointer';
-                    logoutBtn.style.textDecoration = 'none';
-                    logoutBtn.style.transition = 'color 0.2s';
-                    logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Ka bax';
-                    
-                    logoutBtn.addEventListener('mouseenter', () => {
-                        logoutBtn.style.color = '#ff6666';
-                    });
-                    logoutBtn.addEventListener('mouseleave', () => {
-                        logoutBtn.style.color = '#ff4d4d';
-                    });
-
-                    logoutBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        localStorage.removeItem('sahal_authenticated');
-                        localStorage.removeItem('sahal_username');
-                        localStorage.removeItem('sahal_user_email');
-                        window.location.href = 'login.html';
-                    });
-                    
-                    navLinks.insertBefore(greeting, navLinks.firstChild);
-                    navLinks.appendChild(logoutBtn);
-                }
-            }
-        });
-    </script>
-</body>
-</html>
