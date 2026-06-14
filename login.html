@@ -106,14 +106,3 @@ if (isAuthenticated) {
         if (isAuthenticated) {
             const navLinks = document.querySelector('.nav-links');
             const logoutBtn = document.createElement('a');
-            logoutBtn.href = '#';
-            logoutBtn.innerHTML = 'Ka bax';
-            logoutBtn.onclick = () => {
-                localStorage.removeItem('sahal_authenticated');
-                window.location.reload();
-            };
-            navLinks.appendChild(logoutBtn);
-        }
-    </script>
-</body>
-</html>
