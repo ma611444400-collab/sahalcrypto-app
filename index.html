@@ -2006,7 +2006,606 @@
         .txn-status.pending {
             background-color: rgba(255, 179, 0, 0.08);
             color: #FFB300;
-    }
+    }<!-- SIDEBAR NAVIGATION (Desktop) -->
+    <aside class="sidebar">
+        <a href="#" class="sidebar-brand">
+            <i class="fa-solid fa-cubes"></i> Sahal<span>Crypto</span>
+        </a>
+        <ul class="sidebar-menu">
+            <li>
+                <div class="sidebar-link active" onclick="switchView('dashboard')">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </div>
+            </li>
+            <li>
+                <div class="sidebar-link" onclick="switchView('wallet')">
+                    <i class="fa-solid fa-wallet"></i> Boorsada (Wallet)
+                </div>
+            </li>
+            <li>
+                <div class="sidebar-link" onclick="switchView('market')">
+                    <i class="fa-solid fa-house-laptop"></i> Suuqa (Market)
+                </div>
+            </li>
+            <li>
+                <div class="sidebar-link" onclick="switchView('trade')">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i> Ganacsiga (Trade)
+                </div>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="user-badge">
+                <div class="avatar" id="desktopUserAvatar">S</div>
+                <div class="user-meta">
+                    <div class="user-name" id="desktopUsername">Deera Maxamed</div>
+                    <div class="user-email" id="desktopUserEmail">deeq@sahal.com</div>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="logoutUser()">
+                <i class="fa-solid fa-right-from-bracket"></i> Ka bax Akoonka
+            </button>
+        </div>
+    </aside>
+
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header">
+        <a href="#" class="mobile-brand">
+            <i class="fa-solid fa-cubes"></i> Sahal<span>Crypto</span>
+        </a>
+        <div class="mobile-header-actions">
+            <div class="icon-circle-btn" onclick="openNotificationModal()">
+                <i class="fa-solid fa-bell"></i>
+                <div class="notification-indicator"></div>
+            </div>
+            <div class="icon-circle-btn" onclick="openSettingsModal()">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </div>
+        <div class="nav-item" id="nav-wallet" onclick="switchView('wallet')">
+            <i class="fa-solid fa-wallet"></i>
+            Boorsada
+        </div>
+        <div class="nav-item" id="nav-market" onclick="switchView('market')">
+            <i class="fa-solid fa-chart-simple"></i>
+            Suuqa
+        </div>
+        <div class="nav-item" id="nav-trade" onclick="switchView('trade')">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            Ganacsiga
+        </div>
+    </nav>
+
+    <!-- MAIN INTERACTIVE SPACE -->
+    <main>
+        
+        <!-- VIEW 1: DASHBOARD -->
+        <section id="view-dashboard" class="app-view active">
+            
+            <!-- Total Balance Card wrapper -->
+            <div class="balance-card">
+                <div class="balance-header">Isku-darka Haraaga</div>
+                <div class="balance-row">
+                    <div class="balance-value" id="dashboardUSDTBalance">6,074.20 USDT</div>
+                    <div class="percentage-badge">
+                        <i class="fa-solid fa-arrow-trend-up"></i> +4.25%
+                    </div>
+                </div>
+                <div class="currency-equivalent" id="dashboardUSDEquivalent">≈ 6,074.20 USD</div>
+
+                <div class="apk-banner-quick">
+                    <span><i class="fa-brands fa-android"></i> Ma haysataa App-ka rasmiga ah?</span>
+                    <a href="SahalCrypto.apk"><i class="fa-solid fa-download"></i> Degso APK</a>
+                </div>
+            </div>
+
+            <!-- Reload Rate Event Action Bar -->
+            <div class="refresh-rates-bar" onclick="manualRefreshRates()">
+                <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i>
+                Cusboonaysii Sicirka / Refresh Live Rates
+            </div>
+
+            <!-- Real-time Live Prices -->
+            <div class="ticker-grid">
+                <div class="ticker-card" onclick="quickTrade('BTC')">
+                    <div class="ticker-name">
+                        <div class="ticker-label">
+                            <i class="fa-brands fa-bitcoin" style="color: #FFB300;"></i> BTC/USDT
+                        </div>
+                    </div>
+                    <div class="ticker-price" id="ticker-BTC">$64,231.20</div>
+                    <div class="ticker-change up" id="change-BTC">+2.40% Today</div>
+                </div>
+                <div class="ticker-card" onclick="quickTrade('ETH')">
+                    <div class="ticker-name">
+                        <div class="ticker-label">
+                            <i class="fa-brands fa-ethereum" style="color: #A200FF;"></i> ETH/USDT
+                        </div>
+                    </div>
+                    <div class="ticker-price" id="ticker-ETH">$3,450.00</div>
+                    <div class="ticker-change up" id="change-ETH">+1.85% Today</div>
+                </div>
+                <div class="ticker-card" onclick="quickTrade('SOL')">
+                    <div class="ticker-name">
+                        <div class="ticker-label">
+                            <i class="fa-solid fa-circle" style="color: #00E0FF; font-size: 8px;"></i> SOL/USDT
+                        </div>
+                    </div>
+                    <div class="ticker-price" id="ticker-SOL">$148.50</div>
+                    <div class="ticker-change down" id="change-SOL">-0.42% Today</div>
+                </div>
+                <div class="ticker-card" onclick="quickTrade('USDT')">
+                    <div class="ticker-name">
+                        <div class="ticker-label">
+                            <i class="fa-solid fa-dollar-sign" style="color: var(--primary);"></i> USDT/USD
+                        </div>
+                    </div>
+                    <div class="ticker-price" id="ticker-USDT">$1.00</div>
+                    <div class="ticker-change up" id="change-USDT">Stable 0.00%</div>
+                </div>
+            </div>
+
+            <!-- Action Grid Services -->
+            <div class="dashboard-actions-grid">
+                <div class="action-grid-card" onclick="openDepositModal()">
+                    <div class="action-card-header">
+                        <div class="action-icon-box">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="action-grid-info">
+                        <div class="action-title">Iibso Crypto</div>
+                        <div class="action-subtitle">EVC Plus / eDahab</div>
+                    </div>
+                </div>
+
+                <div class="action-grid-card" onclick="openWithdrawModal()">
+                    <div class="action-card-header">
+                        <div class="action-icon-box withdraw">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                    </div>
+                    <div class="action-grid-info">
+                        <div class="action-title">Iibi / Lacag bixi</div>
+                        <div class="action-subtitle">Instant cash-out</div>
+                    </div>
+                </div>
+
+                <div class="action-grid-card" onclick="openP2PModal()">
+                    <div class="action-card-header">
+                        <div class="action-icon-box p2p">
+                            <i class="fa-solid fa-users-between-lines"></i>
+                        </div>
+                    </div>
+                    <div class="action-grid-info">
+                        <div class="action-title">P2P-ka Gudaha</div>
+                        <div class="action-subtitle">Local secure trade</div>
+                    </div>
+                </div>
+
+                <div class="action-grid-card" onclick="openScanModal()">
+                    <div class="action-card-header">
+                        <div class="action-icon-box scan">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                    </div>
+                    <div class="action-grid-info">
+                        <div class="action-title">Skaan garee & Bixi</div>
+                        <div class="action-subtitle">Pay via QR Scan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity List -->
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fa-solid fa-history"></i> Dhaqdhaqaaqii Ugu Dambeeyay
+                </div>
+                <div class="section-link" onclick="switchView('wallet')">Arag Dhammaan</div>
+            </div>
+
+            <div class="transaction-list" id="dashboardTxnList">
+                <!-- Loaded via JS -->
+            </div>
+
+        </section>
+
+        <!-- VIEW 2: BOORSADA (WALLET) -->
+        <section id="view-wallet" class="app-view">
+            
+            <div class="balance-card">
+                <div class="balance-header">Haraaga Guud ee Portfolio</div>
+                <div class="balance-value" id="walletTotalUSDT">6,074.20 USDT</div>
+                <div class="currency-equivalent" id="walletTotalUSD">≈ 6,074.20 USD</div>
+            </div>
+
+            <!-- Somali Local Mobile Money balances -->
+            <h3 style="margin-bottom: 0.8rem; font-weight:800; font-size:1.1rem; color:white;">
+                System Money (EVC / eDahab)
+            </h3>
+            <div class="somali-fiat-accounts">
+                <div class="fiat-account-row">
+                    <div class="fiat-name">
+                        <div class="fiat-avatar evc">E</div>
+                        EVC Plus Balance
+                    </div>
+                    <div class="fiat-balance" id="evcAccountBalance">$120.00 USD</div>
+                </div>
+                <div class="fiat-account-row">
+                    <div class="fiat-name">
+                        <div class="fiat-avatar edahab">D</div>
+                        eDahab Balance
+                    </div>
+                    <div class="fiat-balance" id="edahabAccountBalance">$180.00 USD</div>
+                </div>
+            </div>
+
+            <div class="wallet-actions">
+                <button class="btn-wallet-action deposit" onclick="openDepositModal()">
+                    <i class="fa-solid fa-circle-down"></i> Ku shubo Lacag
+                </button>
+                <button class="btn-wallet-action withdraw" onclick="openWithdrawModal()">
+                    <i class="fa-solid fa-circle-up"></i> La bixi Lacag
+                </button>
+            </div>
+
+            <!-- Individual Cryptocurrencies assets list status -->
+            <h3 style="margin-bottom: 1rem; font-weight:800; font-size:1.1rem; color:white;">Hantidaada Crypto (Assets)</h3>
+            <div class="assets-list">
+                <div class="asset-card" onclick="quickTrade('USDT')">
+                    <div class="asset-left-info">
+                        <div class="asset-icon-brand usdt">$</div>
+                        <div class="asset-titles">
+                            <div class="asset-code">USDT</div>
+                            <div class="asset-fullname">Tether USD</div>
+                        </div>
+                    </div>
+                    <div class="asset-right-values">
+                        <div class="asset-balance" id="walletBalanceUSDT">5,774.20 USDT</div>
+                        <div class="asset-fiat" id="walletValueUSDT">≈ $5,774.20 USD</div>
+                    </div>
+                </div>
+
+                <div class="asset-card" onclick="quickTrade('BTC')">
+                    <div class="asset-left-info">
+                        <div class="asset-icon-brand btc">₿</div>
+                        <div class="asset-titles">
+                            <div class="asset-code">BTC</div>
+                            <div class="asset-fullname">Bitcoin</div>
+                        </div>
+                    </div>
+                    <div class="asset-right-values">
+                        <div class="asset-balance" id="walletBalanceBTC">0.00310 BTC</div>
+                        <div class="asset-fiat" id="walletValueBTC">≈ $199.12 USD</div>
+                    </div>
+                </div>
+
+                <div class="asset-card" onclick="quickTrade('ETH')">
+                    <div class="asset-left-info">
+                        <div class="asset-icon-brand eth">Ξ</div>
+                        <div class="asset-titles">
+                            <div class="asset-code">ETH</div>
+                            <div class="asset-fullname">Ethereum</div>
+                        </div>
+                    </div>
+                    <div class="asset-right-values">
+                        <div class="asset-balance" id="walletBalanceETH">0.02920 ETH</div>
+                        <div class="asset-fiat" id="walletValueETH">≈ $100.88 USD</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full historic table audit list -->
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fa-solid fa-receipt"></i> Taariikhda Macaamilada (History)
+                </div>
+            </div>
+            <div class="transaction-list" id="walletTxnHistory">
+                <!-- Dynamically populated -->
+            </div>
+
+        </section>
+
+        <!-- VIEW 3: SUUQA (MARKET) -->
+        <section id="view-market" class="app-view">
+            
+            <div class="market-search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="market-input" id="searchCoinInput" placeholder="Kala baadh lacagaha (tusaale, BTC, ETH...)" oninput="filterCoins()">
+            </div>
+
+            <div class="filter-tabs-row">
+                <div class="filter-tab-pill active" onclick="filterMarketCategory('all', this)">Dhammaan (All)</div>
+                <div class="filter-tab-pill" onclick="filterMarketCategory('l1', this)">Layer 1</div>
+                <div class="filter-tab-pill" onclick="filterMarketCategory('stable', this)">Stablecoins</div>
+                <div class="filter-tab-pill" onclick="filterMarketCategory('p2p', this)">P2P Available</div>
+            </div>
+
+            <div class="market-list-header">
+                <div>Lacagta / Name</div>
+                <div style="text-align: right;">Qiimaha & Is-Beddelka</div>
+            </div>
+
+            <div class="market-list" id="marketCoinList">
+                <!-- Dynamically populated by JS database -->
+            </div>
+
+        </section>
+
+        <!-- VIEW 4: GANACSIGA (TRADE) -->
+        <section id="view-trade" class="app-view">
+            
+            <div class="trade-container">
+                <div class="trade-direction-tabs">
+                    <button class="trade-dir-btn active buy" id="tradeBtnBuy" onclick="setTradeDirection('Iibso')">Ku Iibso (Buy)</button>
+                    <button class="trade-dir-btn sell" id="tradeBtnSell" onclick="setTradeDirection('Iibi')">Ku Iibi (Sell)</button>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Maalgalinta (Crypto Pair)</label>
+                    <select class="trade-select" id="tradeCryptoAsset" onchange="calculateExchangeEquivalent()">
+                        <option value="USDT">USDT / Somali USD</option>
+                        <option value="BTC" selected>BTC / USDT</option>
+                        <option value="ETH">ETH / USDT</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="tradeAmountLabel">Cadadka Lacagta (Amount on Trade)</label>
+                    <div class="input-with-badge">
+                        <input type="number" step="any" class="trade-input-field" id="tradeInputAmount" placeholder="Ka badan 5" oninput="calculateExchangeEquivalent()">
+                        <div class="input-badge" id="tradeInputBadge">USD</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Habka Lacag-bixinta (Payment Gateway)</label>
+                    <select class="trade-select" id="tradePaymentMethod">
+                        <option value="EVC Plus">EVC Plus (Somalia Mobile Money)</option>
+                        <option value="eDahab">eDahab (Somalia Mobile Money)</option>
+                        <option value="Sahal Wallet">Sahal System Account</option>
+                    </select>
+                </div>
+
+                <div class="trade-quote-details">
+                    <div class="quote-row">
+                        <span class="quote-label">Sicirka Tooska ah (Exchange Rate)</span>
+                        <span class="quote-value" id="quoteLiveRate">1 BTC = $64,231.20 USDT</span>
+                    </div>
+                    <div class="quote-row">
+                        <span class="quote-label">Gudbinta (Network Fee)</span>
+                        <span class="quote-value highlight">Waxba (0.00 USD Free)</span>
+                    </div>
+                    <div class="quote-row">
+                        <span class="quote-label" id="quoteEquivalentLabel">U dhigma (Equivalent Receiving)</span>
+                        <span class="quote-value highlight" id="quoteEquivalentValue">0.00000 BTC</span>
+                    </div>
+                </div>
+
+                <button class="btn-submit-trade buy" id="tradeSubmitBtn" onclick="processTradeSubmission()">
+                    <i class="fa-solid fa-bolt"></i> Xaqiiji Amarka (Confirm Order)
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL 1: SYSTEM NOTIFICATIONS -->
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('notificationModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-bell"></i>
+                <div class="modal-title">Ogeysiisyada (Notifications)</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap:10px;">
+                <div style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.04);">
+                    <div style="font-weight: 700; font-size: 0.9rem; color: white;">Guul: Qiimaha Sicirka waa la kiciyey!</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top:2px;">Suuqa lacagaha crypto-da waa la cusboonaysiiyey hadda.</div>
+                </div>
+                <div style="padding:10px;">
+                    <div style="font-weight: 700; font-size: 0.9rem; color: white;">Ku soo dhowow Sahal Web App!</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top:2px;">Waa nooca rasmiga ah oo u dhigma sifooyinka moobaylka.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: USER SETTINGS & SECURITY -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-gear"></i>
+                <div class="modal-title">Dejinta & Ammaanka (Settings)</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div class="user-badge" style="background: rgba(255, 255, 255, 0.02)">
+                    <div class="avatar" id="modalUserAvatar">S</div>
+                    <div class="user-meta">
+                        <div class="user-name" id="modalUsername">Macaamil Sahal</div>
+                        <div class="user-email" id="modalUserEmail">macaamil@sahal.com</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="SahalCrypto.apk" class="btn-wallet-action deposit" style="text-decoration: none; width: 100%;">
+                        <i class="fa-brands fa-android"></i> Kala soo deg Android App APK
+                    </a>
+                    
+                    <button class="btn-logout" onclick="logoutUser()" style="text-align: center; justify-content: center; background: rgba(255, 77, 77, 0.05); border: 1px solid rgba(255, 77, 77, 0.1);">
+                        <i class="fa-solid fa-right-from-bracket"></i> Ka bax Akoonka (Logout)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: KU SHUBO (DEPOSIT / BUY) MODAL -->
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('depositModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-circle-down"></i>
+                <div class="modal-title">Ku Shubo / Iibso Crypto</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Lacagta aad doonayso</label>
+                <select class="trade-select" id="depositCryptoAsset">
+                    <option value="USDT">USDT (Stablecoin)</option>
+                    <option value="BTC">BTC (Bitcoin)</option>
+                    <option value="ETH">ETH (Ethereum)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mugga Lacagta (USD Value)</label>
+                <div class="input-with-badge">
+                    <input type="number" class="trade-input-field" id="depositAmount" placeholder="Tusaale, 50 USD">
+                    <div class="input-badge">USD</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nidaamka Wareejinta</label>
+                <select class="trade-select" id="depositProvider">
+                    <option value="EVC Plus">EVC Plus Somali System</option>
+                    <option value="eDahab">eDahab Somali Money</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nambarka Moobaylkaaga</label>
+                <input type="text" class="trade-input-field" id="depositPhone" placeholder="Tusaale, 061XXXXXXX">
+            </div>
+
+            <button class="btn-wallet-action deposit" style="width: 100%; padding: 1rem;" onclick="submitDepositAction()">
+                <i class="fa-solid fa-paper-plane"></i> Gudbi Codsiga Shubista
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 4: LA BIXI (WITHDRAW / SELL) MODAL -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('withdrawModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-circle-up"></i>
+                <div class="modal-title">La Bixi / Iibi Crypto</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Hantida la bixinayo</label>
+                <select class="trade-select" id="withdrawCryptoAsset">
+                    <option value="USDT">USDT (Tether)</option>
+                    <option value="BTC">BTC (Bitcoin)</option>
+                    <option value="ETH">ETH (Ethereum)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Cadadka (Amount)</label>
+                <input type="number" class="trade-input-field" id="withdrawAmount" placeholder="Cadadka aad rabto">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Ku hel Shilin / Somali USD Mobile Money</label>
+                <select class="trade-select" id="withdrawProvider">
+                    <option value="EVC Plus">EVC Plus (e-Money)</option>
+                    <option value="eDahab">eDahab Wallet</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nambarka Lacagta lagugu shubayo</label>
+                <input type="text" class="trade-input-field" id="withdrawPhone" placeholder="061/062XXXXXXX">
+            </div>
+
+            <button class="btn-wallet-action deposit" style="width: 100%; padding:1rem; background-color: var(--danger); color: white;" onclick="submitWithdrawAction()">
+                <i class="fa-solid fa-cash-register"></i> Bilow Cash-out ammaan ah
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: P2P LOCAL TRADING IN SOMALIA -->
+    <div class="modal" id="p2pModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close" onclick="closeModal('p2pModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-handshake"></i>
+                <div class="modal-title">P2P-ka Gudaha (Peer-to-Peer Somali)</div>
+            </div>
+            
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom: 1.25rem;">
+                Tani waa goobta ganacsatada Soomaaliyeed ee Sahal Crypto ku kala iibsadaan lacagaha si ammaan ah oo escrow dammaanad ka tahay.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="border: 1px solid rgba(255,255,255,0.05); padding:10px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; background: rgba(255, 255, 255, 0.01);">
+                    <div>
+                        <div style="font-weight:700; color:white;">Abdi_Crypto_Som</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Completes: 98.4% | Rate: 1 USD = 1 USDT</div>
+                    </div>
+                    <button class="btn-wallet-action deposit" style="padding: 6px 12px; font-size:0.8rem; border-radius:6px;" onclick="initiateP2PChat('Abdi_Crypto_Som')">Iibso</button>
+                </div>
+
+                <div style="border: 1px solid rgba(255,255,255,0.05); padding:10px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; background: rgba(255, 255, 255, 0.01);">
+                    <div>
+                        <div style="font-weight:700; color:white;">SomaliGoldTrader</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Completes: 95.1% | Rate: 1 USD = 1.01 USDT</div>
+                    </div>
+                    <button class="btn-wallet-action deposit" style="padding: 6px 12px; font-size:0.8rem; border-radius:6px;" onclick="initiateP2PChat('SomaliGoldTrader')">Iibso</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: SCAN SCREEN & QR PROCESS SIMULATOR -->
+    <div class="modal" id="scanModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('scanModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <i class="fa-solid fa-qrcode"></i>
+                <div class="modal-title">Skaan garee QR & Bixi</div>
+            </div>
+            
+            <div class="qr-scanner-box">
+                <div class="scanner-line"></div>
+                <i class="fa-solid fa-qrcode" style="font-size:4rem; opacity:0.3; color:var(--primary);"></i>
+                <p style="font-size:0.85rem; color: var(--text-muted); font-weight:600;">Raadinaya QR-Code...</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Ama Geli ciwaanka qofka kale rasmiga ah</label>
+                <input type="text" class="trade-input-field" id="scanAddressInput" placeholder="Tusaale: sahal-user-10398">
+            </div>
+
+            <button class="btn-wallet-action deposit" style="width: 100%;" onclick="submitQuickPayAction()">
+                <i class="fa-solid fa-credit-card"></i> Xaqiiji lacag-bixinta tooska ah
+            </button>
+        </div>
+    </div>
+
+    <!-- FEEDBACK SCREEN (STATE PERSISTANCE TRANSACTION FEEDBACK) -->
+    <div class="status-overlay" id="statusOverlay">
+        <div class="success-checkmark" id="statusCheckmark">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="status-title" id="statusTitle">Amarka waa la diiwaangeliyay!</div>
+        <div class="status-message" id="statusMsg">Macaamilkaaga waxaa lagu farsameeyay si ammaan ah gudaha 2 daqiiqo.</div>
+        <button class="btn-status-done" onclick="closeStatusOverlay()">OK / Continue</button>
+    </div>
     </style>
 </head>
 <body>
