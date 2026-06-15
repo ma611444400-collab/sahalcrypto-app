@@ -174,7 +174,7 @@
         .avatar {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, var(--primary), #00A3F5);
+            background: linear-gradient(135s, var(--primary), #00A3F5);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1498,515 +1498,12 @@
             font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-        }/* Mobile Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--bg-card);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            z-index: 100;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
         }
+    </style>
+</head>
+<body>
 
-        @media (min-width: 768px) {
-            .bottom-nav {
-                display: none;
-            }
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 600;
-            flex: 1;
-            padding: 4px 0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .nav-item i {
-            font-size: 1.3rem;
-            transition: all 0.2s ease;
-        }
-
-        .nav-item.active {
-            color: var(--primary);
-        }
-
-        .nav-item.active i {
-            transform: translateY(-2px);
-        }
-
-        /* Main Content Workspace */
-        main {
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            main {
-                padding: 2.5rem;
-                height: 100vh;
-                overflow-y: auto;
-            }
-        }
-
-        /* App Sections/Views */
-        .app-view {
-            display: none;
-            animation: fadeIn 0.35s ease-out;
-        }
-
-        .app-view.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* SECTION: Dashboard View Components */
-        /* Balance Container Card */
-        .balance-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1c242e 100%);
-            border: 1px solid var(--primary-border);
-            border-radius: 20px;
-            padding: 1.8rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 192, 135, 0.05);
-        }
-
-        .balance-card::after {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(0, 192, 135, 0.1) 0%, rgba(0,0,0,0) 70%);
-            bottom: -20px;
-            right: -20px;
-            pointer-events: none;
-        }
-
-        .balance-header {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-
-        .balance-row {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 0.4rem;
-        }
-
-        .balance-value {
-            font-size: 2.2rem;
-            font-family: var(--font-main);
-            font-weight: 800;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
-        .percentage-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(0, 192, 135, 0.12);
-            border: 1px solid rgba(0, 192, 135, 0.2);
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.85rem;
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-family: var(--font-mono);
-        }
-
-        .currency-equivalent {
-            font-size: 0.95rem;
-            color: var(--primary);
-            font-weight: 600;
-            font-family: var(--font-mono);
-        }
-
-        /* Global Floating Decorative Download Area */
-        .apk-banner-quick {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(90deg, rgba(0, 192, 135, 0.1) 0%, rgba(11, 14, 17, 0.5) 100%);
-            border: 1px dashed var(--primary-border);
-            padding: 10px 16px;
-            border-radius: 12px;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .apk-banner-quick a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .apk-banner-quick a:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        /* Refresh Live Rates Bar */
-        .refresh-rates-bar {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--primary);
-            transition: all 0.25s;
-            cursor: pointer;
-            user-select: none;
-            margin-bottom: 2rem;
-        }
-
-        .refresh-rates-bar:active {
-            transform: scale(0.98);
-            background: rgba(0, 192, 135, 0.05);
-        }
-
-        .spin {
-            animation: rotating 0.8s linear;
-        }
-
-        @keyframes rotating {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Rapid Ticker Row Grid */
-        .ticker-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 992px) {
-            .ticker-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .ticker-card {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            transition: border-color 0.25s;
-            cursor: pointer;
-        }
-
-        .ticker-card:hover {
-            border-color: var(--primary-border);
-        }
-
-        .ticker-name {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-muted);
-        }
-
-        .ticker-label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ticker-label img {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
-        }
-
-        .ticker-price {
-            font-size: 1.15rem;
-            font-weight: 800;
-            font-family: var(--font-mono);
-            color: white;
-        }
-
-        .ticker-change {
-            font-size: 0.78rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-        }
-
-        .ticker-change.up {
-            color: var(--primary);
-        }
-
-        .ticker-change.down {
-            color: var(--danger);
-        }
-
-        /* 4-Item Services Matrix Grid (Dashboard Actions) */
-        .dashboard-actions-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 2.2rem;
-        }
-
-        .action-grid-card {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 18px;
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .action-grid-card:hover, .action-grid-card:active {
-            border-color: var(--primary-border);
-            background-color: rgba(255, 255, 255, 0.02);
-            transform: translateY(-2px);
-        }
-
-        .action-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .action-icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background-color: rgba(0, 192, 135, 0.08);
-            border: 1px solid rgba(0, 192, 135, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-        }
-
-        .action-icon-box.withdraw {
-            background-color: rgba(0, 163, 245, 0.08);
-            border-color: rgba(0, 163, 245, 0.15);
-            color: #00A3F5;
-        }
-
-        .action-icon-box.p2p {
-            background-color: rgba(255, 179, 0, 0.08);
-            border-color: rgba(255, 179, 0, 0.15);
-            color: #FFB300;
-        }
-
-        .action-icon-box.scan {
-            background-color: rgba(162, 0, 255, 0.08);
-            border-color: rgba(162, 0, 255, 0.15);
-            color: #A200FF;
-        }
-
-        .action-grid-info {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .action-title {
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .action-subtitle {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Recent Activity Title Header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-            margin-top: 1rem;
-        }
-
-        .section-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title i {
-            color: var(--primary);
-        }
-
-        .section-link {
-            font-size: 0.85rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .section-link:hover {
-            text-decoration: underline;
-            color: var(--primary-hover);
-        }
-
-        /* Transaction List */
-        .transaction-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .transaction-item {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.25s;
-        }
-
-        .transaction-item:hover {
-            background-color: rgba(255, 255, 255, 0.015);
-        }
-
-        .txn-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .txn-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.05rem;
-        }
-
-        .txn-icon.in {
-            background-color: rgba(0, 192, 135, 0.08);
-            border: 1px solid rgba(0, 192, 135, 0.15);
-            color: var(--primary);
-        }
-
-        .txn-icon.out {
-            background-color: rgba(255, 77, 77, 0.08);
-            border: 1px solid rgba(255, 77, 77, 0.15);
-            color: var(--danger);
-        }
-
-        .txn-detail {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .txn-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .txn-time {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .txn-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 3px;
-        }
-
-        .txn-amount {
-            font-size: 0.98rem;
-            font-weight: 800;
-            font-family: var(--font-mono);
-        }
-
-        .txn-amount.plus {
-            color: var(--primary);
-        }
-
-        .txn-amount.minus {
-            color: var(--danger);
-        }
-
-        .txn-status {
-            font-size: 0.72rem;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 4px;
-            background-color: rgba(255, 255, 255, 0.04);
-            color: var(--text-muted);
-        }
-
-        .txn-status.completed {
-            background-color: rgba(0, 192, 135, 0.08);
-            color: var(--primary);
-        }
-
-        .txn-status.pending {
-            background-color: rgba(255, 179, 0, 0.08);
-            color: #FFB300;
-    }<!-- SIDEBAR NAVIGATION (Desktop) -->
+    <!-- SIDEBAR NAVIGATION (Desktop) -->
     <aside class="sidebar">
         <a href="#" class="sidebar-brand">
             <i class="fa-solid fa-cubes"></i> Sahal<span>Crypto</span>
@@ -2606,6 +2103,601 @@
         <div class="status-message" id="statusMsg">Macaamilkaaga waxaa lagu farsameeyay si ammaan ah gudaha 2 daqiiqo.</div>
         <button class="btn-status-done" onclick="closeStatusOverlay()">OK / Continue</button>
     </div>
-    </style>
-</head>
-<body>
+
+    <!-- JAVASCRIPT STATE ENGINE AND DATABASE IMPLEMENTATION -->
+    <script>
+        // Default Wallet and Market Database
+        const COIN_DATABASE = {
+            USDT: { name: "Tether USD", price: 1.00, change: "0.00%", categories: ["all", "stable", "p2p"], symbol: "USDT" },
+            BTC: { name: "Bitcoin", price: 64231.20, change: "+2.40%", categories: ["all", "l1", "p2p"], symbol: "BTC" },
+            ETH: { name: "Ethereum", price: 3450.00, change: "+1.85%", categories: ["all", "l1", "p2p"], symbol: "ETH" },
+            SOL: { name: "Solana", price: 148.50, change: "-0.42%", categories: ["all", "l1"], symbol: "SOL" },
+            BNB: { name: "BNB Smart Chain", price: 582.10, change: "+3.10%", categories: ["all", "l1"], symbol: "BNB" }
+        };
+
+        let currentTradeDirection = "Iibso"; // Iibso or Iibi
+
+        // State variables populated or fetched from localStorage
+        let walletState = {
+            usdt: 5774.20,
+            btc: 0.00310,
+            eth: 0.02920,
+            evc: 120.00,
+            edahab: 180.00,
+            transactions: [
+                { id: 'TXN-90234', type: 'Iibso', cryptoSymbol: 'BTC', amount: '100.00', status: 'Dhammaystiran', timestamp: 'Juun 14, 10:24 AM', paymentMethod: 'EVC Plus' },
+                { id: 'TXN-90233', type: 'deposit', cryptoSymbol: 'USDT', amount: '500.00', status: 'Dhammaystiran', timestamp: 'Juun 13, 08:15 PM', paymentMethod: 'eDahab' },
+                { id: 'TXN-90232', type: 'Iibi', cryptoSymbol: 'ETH', amount: '50.00', status: 'Dhammaystiran', timestamp: 'Juun 12, 02:44 PM', paymentMethod: 'EVC Plus' }
+            ]
+        };
+
+        // Initialize state engine
+        function initCryptoState() {
+            if (!localStorage.getItem('sahal_wallet_assets')) {
+                localStorage.setItem('sahal_wallet_assets', JSON.stringify(walletState));
+            } else {
+                walletState = JSON.parse(localStorage.getItem('sahal_wallet_assets'));
+            }
+            
+            // Populate usernames dynamically
+            const activeUser = localStorage.getItem('sahal_username') || "Macaamil";
+            const activeEmail = localStorage.getItem('sahal_user_email') || "user@sahalcrypt.com";
+            
+            const firstLetter = activeUser.charAt(0).toUpperCase();
+            
+            // Update UI widgets
+            document.getElementById('desktopUsername').textContent = activeUser;
+            document.getElementById('desktopUserEmail').textContent = activeEmail;
+            document.getElementById('desktopUserAvatar').textContent = firstLetter;
+            
+            document.getElementById('modalUsername').textContent = activeUser;
+            document.getElementById('modalUserEmail').textContent = activeEmail;
+            document.getElementById('modalUserAvatar').textContent = firstLetter;
+
+            updateBalancesUI();
+            renderTransactions();
+            renderMarketList();
+            calculateExchangeEquivalent();
+        }
+
+        // Save active state to localStorage
+        function saveState() {
+            localStorage.setItem('sahal_wallet_assets', JSON.stringify(walletState));
+            updateBalancesUI();
+            renderTransactions();
+        }
+
+        // Core UI Update for portfolios
+        function updateBalancesUI() {
+            const btcUSD = walletState.btc * COIN_DATABASE.BTC.price;
+            const ethUSD = walletState.eth * COIN_DATABASE.ETH.price;
+            const usdtUSD = walletState.usdt * COIN_DATABASE.USDT.price;
+            const totalPortfolioUSD = btcUSD + ethUSD + usdtUSD;
+
+            // Dashboard
+            document.getElementById('dashboardUSDTBalance').textContent = totalPortfolioUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " USDT";
+            document.getElementById('dashboardUSDEquivalent').textContent = "≈ " + totalPortfolioUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " USD";
+
+            // Wallet view total
+            document.getElementById('walletTotalUSDT').textContent = totalPortfolioUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " USDT";
+            document.getElementById('walletTotalUSD').textContent = "≈ " + totalPortfolioUSD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " USD";
+
+            // Local System Account Balances (EVC, eDahab)
+            document.getElementById('evcAccountBalance').textContent = "$" + walletState.evc.toFixed(2) + " USD";
+            document.getElementById('edahabAccountBalance').textContent = "$" + walletState.edahab.toFixed(2) + " USD";
+
+            // Precise crypto listings
+            document.getElementById('walletBalanceUSDT').textContent = walletState.usdt.toFixed(2) + " USDT";
+            document.getElementById('walletValueUSDT').textContent = "≈ $" + usdtUSD.toFixed(2) + " USD";
+
+            document.getElementById('walletBalanceBTC').textContent = walletState.btc.toFixed(5) + " BTC";
+            document.getElementById('walletValueBTC').textContent = "≈ $" + btcUSD.toFixed(2) + " USD";
+
+            document.getElementById('walletBalanceETH').textContent = walletState.eth.toFixed(5) + " ETH";
+            document.getElementById('walletValueETH').textContent = "≈ $" + ethUSD.toFixed(2) + " USD";
+        }
+
+        // Switch application views smoothly
+        function switchView(viewId) {
+            // Remove active classes from all sections and sidebar links / bottom nav tabs
+            document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(tab => tab.classList.remove('active'));
+
+            // Set active target view
+            document.getElementById('view-' + viewId).classList.add('active');
+
+            // Set sidebar active
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            sidebarLinks.forEach(link => {
+                if(link.textContent.toLowerCase().includes(viewId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Set bottom nav active
+            const activeTab = document.getElementById('nav-' + viewId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        // Render both dashboard recent and wallet transaction sections
+        function renderTransactions() {
+            const dashboardList = document.getElementById('dashboardTxnList');
+            const walletList = document.getElementById('walletTxnHistory');
+            
+            dashboardList.innerHTML = '';
+            walletList.innerHTML = '';
+
+            if (walletState.transactions.length === 0) {
+                const emptyHTML = `<div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.9rem;">Laba midna laguma hayo! Ma jiraan macaamil hore.</div>`;
+                dashboardList.innerHTML = emptyHTML;
+                walletList.innerHTML = emptyHTML;
+                return;
+            }
+
+            // Reverse to show latest first
+            const sortedTxns = [...walletState.transactions].reverse();
+
+            sortedTxns.forEach((txn, index) => {
+                const isDeposit = txn.type.toLowerCase() === 'deposit';
+                const isIibso = txn.type.toLowerCase() === 'iibso' || txn.type.toLowerCase() === 'buy';
+                
+                let iconClass = 'fa-solid fa-arrow-up';
+                let amountClass = 'minus';
+                let sign = '-';
+                let wrapperTypeClass = 'out';
+                let localNameLabel = txn.type;
+
+                if (isDeposit || isIibso) {
+                    iconClass = 'fa-solid fa-arrow-down';
+                    amountClass = 'plus';
+                    sign = '+';
+                    wrapperTypeClass = 'in';
+                    localNameLabel = isDeposit ? 'Deposit' : 'Iibso';
+                } else {
+                    localNameLabel = 'Iibi / Withdraw';
+                }
+
+                const html = `
+                    <div class="transaction-item">
+                        <div class="txn-left">
+                            <div class="txn-icon ${wrapperTypeClass}">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="txn-detail">
+                                <div class="txn-title">${localNameLabel} ${txn.cryptoSymbol}</div>
+                                <div class="txn-time">${txn.timestamp} • Via ${txn.paymentMethod || 'EVC Plus'}</div>
+                            </div>
+                        </div>
+                        <div class="txn-right">
+                            <div class="txn-amount ${amountClass}">${sign}${parseFloat(txn.amount).toLocaleString()} ${txn.cryptoSymbol}</div>
+                            <div class="txn-status completed">Dhammaystiran</div>
+                        </div>
+                    </div>
+                `;
+
+                // Limit dashboard display to top 3
+                if (index < 3) {
+                    dashboardList.innerHTML += html;
+                }
+                walletList.innerHTML += html;
+            });
+        }
+
+        // Render whole coin list in real-time
+        function renderMarketList() {
+            const coinListContainer = document.getElementById('marketCoinList');
+            coinListContainer.innerHTML = '';
+
+            Object.keys(COIN_DATABASE).forEach(key => {
+                const coin = COIN_DATABASE[key];
+                
+                const isUp = !coin.change.startsWith('-');
+                const rateClass = isUp ? 'up' : 'down';
+                const iconSymbolChar = key.charAt(0);
+                
+                const p2pBadge = coin.categories.includes('p2p') ? `<span class="market-p2p-badge">P2P</span>` : '';
+
+                const html = `
+                    <div class="market-row" onclick="quickTrade('${key}')">
+                        <div class="market-left">
+                            <div class="coin-icon ${key.toLowerCase()}">${iconSymbolChar}</div>
+                            <div class="coin-meta">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span class="coin-symbol">${key}/USDT</span>
+                                    ${p2pBadge}
+                                </div>
+                                <span class="coin-name">${coin.name}</span>
+                            </div>
+                        </div>
+                        <div class="market-right">
+                            <span class="coin-price">$${coin.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span class="coin-change-pill ${rateClass}">${coin.change}</span>
+                        </div>
+                    </div>
+                `;
+                coinListContainer.innerHTML += html;
+            });
+        }
+
+        // Ticker and categories search filter
+        function filterCoins() {
+            const val = document.getElementById('searchCoinInput').value.trim().toLowerCase();
+            const rows = document.querySelectorAll('.market-row');
+            
+            rows.forEach(row => {
+                const text = row.querySelector('.coin-symbol').textContent.toLowerCase();
+                const fullName = row.querySelector('.coin-name').textContent.toLowerCase();
+                if (text.includes(val) || fullName.includes(val)) {
+                    row.style.display = 'flex';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Category tabs filtering
+        function filterMarketCategory(catId, btnRef) {
+            document.querySelectorAll('.filter-tab-pill').forEach(btn => btn.classList.remove('active'));
+            btnRef.classList.add('active');
+
+            const rows = document.querySelectorAll('.market-row');
+            
+            Object.keys(COIN_DATABASE).forEach((key, index) => {
+                const coin = COIN_DATABASE[key];
+                const matchingRow = rows[index];
+                if (!matchingRow) return;
+
+                if (catId === 'all' || coin.categories.includes(catId)) {
+                    matchingRow.style.display = 'flex';
+                } else {
+                    matchingRow.style.display = 'none';
+                }
+            });
+        }
+
+        // manualRates Refresh Animation Emulator
+        function manualRefreshRates() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('spin');
+            
+            // Randomly update prices slightly to simulate real volatile market feeds
+            setTimeout(() => {
+                icon.classList.remove('spin');
+                
+                Object.keys(COIN_DATABASE).forEach(key => {
+                    const coin = COIN_DATABASE[key];
+                    if (key === 'USDT') return; // Stable stays stable
+                    
+                    const fluctuation = (Math.random() * 0.04) - 0.018; // Fluctuate -1.8% to 2.2%
+                    coin.price = coin.price * (1 + fluctuation);
+                    
+                    const sign = fluctuation >= 0 ? '+' : '';
+                    coin.change = sign + (fluctuation * 100).toFixed(2) + "%";
+
+                    // Update main screen fast
+                    const elPrice = document.getElementById('ticker-' + key);
+                    const elChange = document.getElementById('change-' + key);
+                    
+                    if (elPrice) elPrice.textContent = "$" + coin.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    if (elChange) {
+                        elChange.textContent = coin.change + " Today";
+                        if (fluctuation >= 0) {
+                            elChange.className = "ticker-change up";
+                        } else {
+                            elChange.className = "ticker-change down";
+                        }
+                    }
+                });
+
+                renderMarketList();
+                initCryptoState(); // re-sync overall portfolio valuations
+                
+                showFeedbackToast("Sicirada waa la cusboonaysiiyay ee ku raaxayso suuqa!");
+            }, 800);
+        }
+
+        // Initiate Trade directions parameters
+        function setTradeDirection(dir) {
+            currentTradeDirection = dir;
+            
+            const btnBuy = document.getElementById('tradeBtnBuy');
+            const btnSell = document.getElementById('tradeBtnSell');
+            const tradeSubmitBtn = document.getElementById('tradeSubmitBtn');
+            const label = document.getElementById('tradeAmountLabel');
+
+            if (dir === 'Iibso') {
+                btnBuy.classList.add('active');
+                btnSell.classList.remove('active');
+                tradeSubmitBtn.className = "btn-submit-trade buy";
+                tradeSubmitBtn.innerHTML = `<i class="fa-solid fa-bolt"></i> Bilow amarka Iibsiga rasmiga ah`;
+                label.innerHTML = `Cadadka aad ku iibsanayso (USD Value)`;
+            } else {
+                btnSell.classList.add('active');
+                btnBuy.classList.remove('active');
+                tradeSubmitBtn.className = "btn-submit-trade sell";
+                tradeSubmitBtn.innerHTML = `<i class="fa-solid fa-cash-register"></i> Bilow amarka Iibinta (Cash out)`;
+                label.innerHTML = `Cadadka aad ka iibinayso Crypto-ga`;
+            }
+            calculateExchangeEquivalent();
+        }
+
+        // Handle Trade Calculations
+        function calculateExchangeEquivalent() {
+            const assetKey = document.getElementById('tradeCryptoAsset').value;
+            const liveRate = COIN_DATABASE[assetKey]?.price || 1.0;
+            const inputAmount = parseFloat(document.getElementById('tradeInputAmount').value) || 0.0;
+            
+            const rateLabel = document.getElementById('quoteLiveRate');
+            const equivLabel = document.getElementById('quoteEquivalentLabel');
+            const equivValue = document.getElementById('quoteEquivalentValue');
+
+            rateLabel.textContent = `1 ${assetKey} = $${liveRate.toLocaleString(undefined, {minimumFractionDigits: 2})} USDT`;
+
+            if (currentTradeDirection === 'Iibso') {
+                // Buying Crypto using USD balance
+                equivLabel.textContent = "U dhigma (Equivalent Receiving)";
+                const receivingAmount = inputAmount / liveRate;
+                equivValue.textContent = receivingAmount.toFixed(6) + " " + assetKey;
+            } else {
+                // Selling Crypto to receive USD/USDT
+                equivLabel.textContent = "U dhigma Somali Cash EVC/eDahab";
+                const fiatAmount = inputAmount * liveRate;
+                equivValue.textContent = "$" + fiatAmount.toLocaleString(undefined, {minimumFractionDigits: 2}) + " USD";
+            }
+        }
+
+        // Quick trade connector from list items
+        function quickTrade(coinSymbol) {
+            switchView('trade');
+            document.getElementById('tradeCryptoAsset').value = coinSymbol;
+            setTradeDirection('Iibso');
+            calculateExchangeEquivalent();
+        }
+
+        // submit Deposit Modal Form processing
+        function submitDepositAction() {
+            const asset = document.getElementById('depositCryptoAsset').value;
+            const amount = parseFloat(document.getElementById('depositAmount').value) || 0.0;
+            const provider = document.getElementById('depositProvider').value;
+            const phone = document.getElementById('depositPhone').value.trim();
+
+            if (amount < 2) {
+                alert("Fadlan geli xaddi ka badan $2 USD");
+                return;
+            }
+            if(!phone) {
+                alert("Fadlan qor nambarkaaga si aad lacaj-buxinta u dhameystirto.");
+                return;
+            }
+
+            // Simulate credit to payment system
+            if (provider.includes('EVC')) {
+                walletState.evc += amount;
+            } else {
+                walletState.edahab += amount;
+            }
+
+            // Add transaction log
+            const newTxn = {
+                id: 'TXN-' + Math.floor(Math.random() * 90000 + 10000),
+                type: 'deposit',
+                cryptoSymbol: 'USDT',
+                amount: amount.toString(),
+                status: 'Dhammaystiran',
+                timestamp: 'Maanta, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                paymentMethod: provider
+            };
+
+            walletState.transactions.push(newTxn);
+            saveState();
+            closeModal('depositModal');
+            showStatusOverlay("Codsigaaga Shubista waa aqbalay!", `Waxaa si guul leh ugu soo shubtay $${amount.toFixed(2)} USD adeegga ${provider}. Hadda waxaad u isticmaali kartaa inaad ku iibsato crypto.`);
+        }
+
+        // submit Withdraw Modal Form processing
+        function submitWithdrawAction() {
+            const asset = document.getElementById('withdrawCryptoAsset').value;
+            const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+            const provider = document.getElementById('withdrawProvider').value;
+            const phone = document.getElementById('withdrawPhone').value.trim();
+
+            if (amount <= 0) {
+                alert("Fadlan geli cadad lacag sax ah.");
+                return;
+            }
+
+            // Check if wallet has enough asset balance
+            const assetKey = asset.toLowerCase();
+            if (walletState[assetKey] < amount) {
+                alert("Haraagaagu kuma filna! Ma haysatid " + amount + " " + asset);
+                return;
+            }
+
+            // deduct from balance
+            walletState[assetKey] -= amount;
+
+            // Log Transaction
+            const newTxn = {
+                id: 'TXN-' + Math.floor(Math.random() * 90000 + 10000),
+                type: 'Iibi',
+                cryptoSymbol: asset,
+                amount: amount.toString(),
+                status: 'Dhammaystiran',
+                timestamp: 'Maanta, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                paymentMethod: provider
+            };
+
+            walletState.transactions.push(newTxn);
+            saveState();
+            closeModal('withdrawModal');
+            showStatusOverlay("Lacag labixiddu waa ay guuleysatay!", `Waxaa si koonfur iyo waqooyi ugu xawishay hantidaada ku dhamaatay lacag ahaan (${provider}) oo ah nambarka ${phone} si toos ah.`);
+        }
+
+        // process Trade views confirm button action
+        function processTradeSubmission() {
+            const asset = document.getElementById('tradeCryptoAsset').value;
+            const inputAmount = parseFloat(document.getElementById('tradeInputAmount').value) || 0.0;
+            const provider = document.getElementById('tradePaymentMethod').value;
+            const coinPrice = COIN_DATABASE[asset].price;
+
+            if (inputAmount <= 0) {
+                alert("Fadlan geli cadad sax ah.");
+                return;
+            }
+
+            if (currentTradeDirection === "Iibso") {
+                // Check if EVC/eDahab holds enough money
+                const subBalance = provider === 'eDahab' ? walletState.edahab : walletState.evc;
+                if (subBalance < inputAmount) {
+                    alert(`Haraagaaga ${provider} kuma filna! Waxaad haysataa uun $${subBalance.toFixed(2)}. Fadlan ku shubo meesha hore.`);
+                    return;
+                }
+
+                // Deduct fiat & Add crypto asset
+                if (provider === 'eDahab') {
+                    walletState.edahab -= inputAmount;
+                } else {
+                    walletState.evc -= inputAmount;
+                }
+
+                const receivedCrypto = inputAmount / coinPrice;
+                walletState[asset.toLowerCase()] += receivedCrypto;
+
+                // Log Transaction
+                const newTxn = {
+                    id: 'TXN-' + Math.floor(Math.random() * 90000 + 10000),
+                    type: 'Iibso',
+                    cryptoSymbol: asset,
+                    amount: receivedCrypto.toFixed(5),
+                    status: 'Dhammaystiran',
+                    timestamp: 'Maanta, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    paymentMethod: provider
+                };
+                walletState.transactions.push(newTxn);
+                saveState();
+                
+                showStatusOverlay("Guul: Waad Iibsatay!", `Waxaa si toos ah u iibsatay ${receivedCrypto.toFixed(5)} ${asset} adigoo adeegsaday $${inputAmount.toFixed(2)} USD oo ${provider} ah.`);
+
+            } else {
+                // Selling Asset for EVC / eDahab Somali dollars
+                const assetBal = walletState[asset.toLowerCase()];
+                if (assetBal < inputAmount) {
+                    alert(`Ma haysatid hanti kugu filan oo aad iibiso! Waxaad haysataa kaliya ${assetBal.toFixed(5)} ${asset}.`);
+                    return;
+                }
+
+                // deduct crypto & add EVC Balance
+                walletState[asset.toLowerCase()] -= inputAmount;
+                const convertedFiat = inputAmount * coinPrice;
+                
+                if (provider === 'eDahab') {
+                    walletState.edahab += convertedFiat;
+                } else {
+                    walletState.evc += convertedFiat;
+                }
+
+                // Log Transaction
+                const newTxn = {
+                    id: 'TXN-' + Math.floor(Math.random() * 90000 + 10000),
+                    type: 'Iibi',
+                    cryptoSymbol: asset,
+                    amount: inputAmount.toString(),
+                    status: 'Dhammaystiran',
+                    timestamp: 'Maanta, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    paymentMethod: provider
+                };
+                walletState.transactions.push(newTxn);
+                saveState();
+                
+                showStatusOverlay("Guul: Waad Iibisay!", `Waxaa si guul leh u iibisay ${inputAmount} ${asset} oo aad ku heshay $${convertedFiat.toFixed(2)} USD oo gudaha ${provider} ah.`);
+            }
+        }
+
+        // initiate P2P Chat simulator
+        function initiateP2PChat(username) {
+            closeModal('p2pModal');
+            showStatusOverlay(`Ganacsiga P2P bilowday!`, `Waxaa furey xiriir escrow ammaan ah oo aad la yeelanayso ${username}. Fadlan sug inta ganacsadaha laga aqbalayo xiriirka dhijitaalka ah.`);
+        }
+
+        // QR Scan execution simulator
+        function submitQuickPayAction() {
+            const address = document.getElementById('scanAddressInput').value.trim();
+            if(!address) {
+                alert("Fadlan gali ciwaan saxa (Sahal Wallet ID).");
+                return;
+            }
+            closeModal('scanModal');
+            showStatusOverlay("Bixintu WAY GUULEYSATAY!", `Macaamilkaagu ($5.50 / $10 EVC) waxaa loo diray si degdeg ah ciwaanka ${address}. Dammaanad ESCROW waa lagu daray.`);
+        }
+
+        // Generic Open Modals Utils
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Specific Quick CTA dialog utilities
+        function openDepositModal() { openModal('depositModal'); }
+        function openWithdrawModal() { openModal('withdrawModal'); }
+        function openP2PModal() { openModal('p2pModal'); }
+        function openScanModal() { openModal('scanModal'); }
+        function openNotificationModal() { openModal('notificationModal'); }
+        function openSettingsModal() { openModal('settingsModal'); }
+
+        // General status overlays
+        function showStatusOverlay(title, msg) {
+            document.getElementById('statusTitle').textContent = title;
+            document.getElementById('statusMsg').textContent = msg;
+            document.getElementById('statusOverlay').classList.add('active');
+        }
+        function closeStatusOverlay() {
+            document.getElementById('statusOverlay').classList.remove('active');
+        }
+
+        // User logout logic
+        function logoutUser() {
+            localStorage.removeItem('sahal_authenticated');
+            localStorage.removeItem('sahal_username');
+            localStorage.removeItem('sahal_user_email');
+            window.location.href = 'login.html';
+        }
+
+        // Simple customized feedback Toast
+        function showFeedbackToast(msg) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '85px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'var(--bg-card)';
+            toast.style.color = 'var(--primary)';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '30px';
+            toast.style.border = '1px solid var(--primary-border)';
+            toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+            toast.style.zIndex = '400';
+            toast.style.fontSize = '0.88rem';
+            toast.style.fontWeight = '700';
+            toast.style.textAlign = 'center';
+            toast.style.minWidth = '280px';
+            
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transition = 'opacity 0.4s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 2500);
+        }
+
+        // Launch app on load
+        window.onload = initCryptoState;
+    </script>
+</body>
+</html>
